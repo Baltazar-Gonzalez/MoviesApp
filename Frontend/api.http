@@ -1,0 +1,11 @@
+//ENDPOINT
+
+//Tendencias diarias
+GET http://localhost:5500/movies/trending HTTP/1.1
+//Tendencias semanales
+GET http://localhost:5500/movies/trending HTTP/1.1
+
+
+###
+
+GET https://api.themoviedb.org/3/movie/157336?api_key=6249247b75f848a68947c76bb8a1fc0f&append_to_response=videos

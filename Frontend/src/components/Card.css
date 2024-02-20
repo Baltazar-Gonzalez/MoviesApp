@@ -1,0 +1,22 @@
+.card{
+    max-height: 375px;
+}
+.card img{
+    height: 220px;
+}
+.genre{
+    font-size: .75em;
+    color: #aaa;
+}
+.title{
+    font-size: .9em;
+}
+.card_information_div{
+    display: flex;
+    justify-content: space-between;
+    font-size: .75em;
+}
+.rating{
+    font-size: 2em;
+    color: yellow;
+}

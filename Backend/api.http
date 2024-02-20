@@ -1,0 +1,16 @@
+
+
+### Peliculas populares
+GET http://localhost:5500/movies/populares HTTP/1.1
+
+### Peliculas en cartelera
+GET http://localhost:5500/movies/now-playing HTTP/1.1
+
+### Peliculas animadas
+GET http://localhost:5500/movies/animacion HTTP/1.1
+
+### Series populares
+GET http://localhost:5500/series/populares HTTP/1.1
+
+### Series al aire
+GET http://localhost:5500/series/on-the-air HTTP/1.1
