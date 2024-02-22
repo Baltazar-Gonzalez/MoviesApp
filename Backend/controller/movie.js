@@ -25,4 +25,22 @@ export class MovieController{
             res.status(500).json({message: error.message})
         }
     }
+    static async getById(req, res){
+        const {id} = req.params
+        try{
+            const movies = await MovieModel.getById(id)
+            res.json(movies)
+        }catch(err){
+            res.status(500).json({message: error.message})
+        }
+    }
+    static async getBySearch(req, res){
+      const {query} = req.query
+        try{
+            const movies = await MovieModel.getBySearch(query)
+            res.json(movies)
+        }catch(err){
+            res.status(500).json({message: error.message})
+        }
+    }
 }

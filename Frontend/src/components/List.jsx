@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Card } from './Card'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './List.css'
 
-export function List({title, url}){
+export function List({title, url, media}){
     const [list, setlist] = useState([]);
 
     useEffect(() => {
@@ -16,12 +16,17 @@ export function List({title, url}){
     }, [])
   
     return (
-      <section className="list">
-        <h1>{title}</h1>
-        <ul className='list_ul'>
-        {list.map(elem => (
-            <Card data={elem}/>
-        ))}
+      <section className="px-4 text-white bg-slate-800">
+        <h1 className='py-3 text-xl font-bold'>{title}</h1>
+        <ul className='overflow-x-scroll flex gap-4'>
+        {list.map(elem => {
+            return (
+                <Link to={`/${media}/${elem.id}`}>
+                  <Card id={elem.id} media={media}/>
+                </Link>
+              )
+        })
+        }
         </ul>
       </section>
     );

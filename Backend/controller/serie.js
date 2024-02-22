@@ -17,4 +17,22 @@ export class SerieController{
             res.status(500).json({message: error.message})
         }
     }
+    static async getById(req, res){
+        const {id} = req.params
+        try{
+            const movies = await SerieModel.getById(id)
+            res.json(movies)
+        }catch(err){
+            res.status(500).json({message: error.message})
+        }
+    }
+    static async getBySearch(req, res){
+      const {query} = req.query
+        try{
+            const movies = await SerieModel.getBySearch(query)
+            res.json(movies)
+        }catch(err){
+            res.status(500).json({message: error.message})
+        }
+    }
 }
