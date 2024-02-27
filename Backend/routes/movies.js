@@ -1,24 +1,24 @@
-import { Router } from "express";
-import { MovieController } from "../controller/movie.js";
+import { Router } from 'express'
+import { MovieController } from '../controller/movie.js'
 const movieRoutes = Router()
 
-movieRoutes.get("/", (req, res) => {
+movieRoutes.get('/', (req, res) => {
     res.status(200)
 })
 
 //Populares
-movieRoutes.get("/populares", MovieController.getPopulars)
+movieRoutes.get('/populares', MovieController.getPopulars)
 
 //En cartelera
-movieRoutes.get("/now-playing", MovieController.getNowPlaying)
+movieRoutes.get('/now-playing', MovieController.getNowPlaying)
 
 //Animación
-movieRoutes.get("/animacion", MovieController.getAnimationMovies)
+movieRoutes.get('/animacion', MovieController.getAnimationMovies)
 
 //Encontrar por busqueda
-movieRoutes.get("/search", MovieController.getBySearch)
+movieRoutes.get('/search', MovieController.getBySearch)
 
 //Encontrar por id
-movieRoutes.get("/:id", MovieController.getById)
+movieRoutes.get('/:id', MovieController.getById)
 
 export default movieRoutes

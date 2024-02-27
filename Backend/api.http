@@ -20,3 +20,46 @@ GET http://localhost:5500/series/on-the-air HTTP/1.1
 
 ### Encontrar serie por busqueda
 GET http://localhost:5500/series/search?query=spiderman HTTP/1.1
+
+
+
+
+### Crear usuario
+POST http://localhost:5500/users HTTP/1.1
+content-type: application/json
+
+{
+    "id": 1,
+    "name": "balta",
+    "email": "aa@gmail.com",
+    "image": "...",
+    "password": "123"
+}
+
+### Crear favorito
+POST http://localhost:5500/favorites HTTP/1.1
+content-type: application/json
+
+{
+    "id": 1,
+    "favId": 321,
+    "type": "movie",
+    "userId": 1
+}
+
+
+
+
+
+### Acceder usuario
+GET  http://localhost:5500/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "aa@gmail.com",
+    "password": "123"
+}
+
+### Acceder a favoritos del usuario
+GET  http://localhost:5500/favorites/1 HTTP/1.1
+x
