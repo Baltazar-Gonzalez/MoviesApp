@@ -12,7 +12,7 @@ export class FavoriteController {
             })
 
             if (existingFavorite) {
-                return res.status(400).json({
+                res.status(400).json({
                     message: 'El usuario ya tiene este elemento en favoritos',
                 })
             }
@@ -30,17 +30,28 @@ export class FavoriteController {
         }
     }
     static async getByUserId(req, res) {
-        const { userId } = req.params;
-
+        const { userId } = req.params
+        const page = req.query.page ?? 1
+        const limit = 20
         try {
-          const favorites = await FavoriteModel.findAll({ where: { userId } });
-    
-          if (!favorites) {
-            return res.status(404).json({ message: 'No se encontraron favoritos para este usuario' });
-          }
-          return res.status(200).json(favorites);
+            const { count, rows } = await FavoriteModel.findAndCountAll({
+                where: { userId },
+                limit,
+                offset: (page - 1) * limit,
+            })
+
+            const totalPages = Math.ceil(count / limit)
+
+            const favorites = {
+                page,
+                results: rows,
+                total_pages: totalPages,
+                total_results: count,
+            }
+
+            res.status(200).json(favorites)
         } catch (error) {
-          return res.status(500).json({ message: error.message });
+            res.status(500).json({ message: error.message })
         }
     }
 }

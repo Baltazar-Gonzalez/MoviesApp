@@ -7,9 +7,12 @@ userRoutes.get('/', (req, res) => {
 })
 userRoutes.post('/', UserController.createUser)
 
-userRoutes.get('/login', UserController.login)
+userRoutes.get('/all', UserController.getAllUser)
+
+userRoutes.post('/login', UserController.login)
+
+userRoutes.get('/:id', UserController.getUserById)
 
 userRoutes.delete('/:id', UserController.deleteUser)
-
 
 export default userRoutes

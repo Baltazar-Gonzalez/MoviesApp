@@ -1,4 +1,25 @@
-export function Card({ data }) {
+import { useEffect, useState } from 'react'
+import { instance, endpoints } from '../API/api'
+
+export function FavoriteCard({ id, media }) {
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+        let endpoint = ''
+        if (media === 'movies') {
+            endpoint = endpoints.getMovieById(id)
+        } else if (media === 'series') {
+            endpoint = endpoints.getSerieById(id)
+        }
+        instance
+            .get(endpoint)
+            .then((response) => {
+                setData(response.data)
+            })
+            .catch((error) => console.error('Error al obtener datos:', error))
+    }, [id])
+
+    console.log(data)
     return (
         <div key={data.id} style={{ minHeight: '360px' }}>
             <img

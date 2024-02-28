@@ -7,8 +7,6 @@ favoritesRoutes.get('/', (req, res) => {
 })
 favoritesRoutes.post('/', FavoriteController.createFavorite)
 
-//PROGRAMAR
 favoritesRoutes.get('/:userId', FavoriteController.getByUserId)
-
 
 export default favoritesRoutes

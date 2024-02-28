@@ -7,7 +7,7 @@ export class SerieModel {
             const response = await axios.get(
                 `https://api.themoviedb.org/3/tv/popular?language=es-AR&api_key=${KEY}`,
             )
-            return {...response.data, type: "series"}
+            return { ...response.data, type: 'series' }
         } catch (error) {
             console.error('Error al obtener datos:', error)
             throw new Error('Error al obtener datos')
@@ -19,7 +19,7 @@ export class SerieModel {
             const response = await axios.get(
                 `https://api.themoviedb.org/3/tv/on_the_air?language=es-AR&timezone=AR&api_key=${KEY}`,
             )
-            return {...response.data, type: "series"}
+            return { ...response.data, type: 'series' }
         } catch (error) {
             console.error('Error al obtener datos:', error)
             throw new Error('Error al obtener datos')
@@ -31,7 +31,7 @@ export class SerieModel {
             const response = await axios.get(
                 `https://api.themoviedb.org/3/tv/${id}?append_to_response=credits&language=es-AR&api_key=${KEY}`,
             )
-            return {...response.data, type: "series"}
+            return { ...response.data, type: 'series' }
         } catch (error) {
             console.error('Error al obtener datos:', error)
             throw new Error('Error al obtener datos')
@@ -43,7 +43,7 @@ export class SerieModel {
             const response = await axios.get(
                 `https://api.themoviedb.org/3/search/tv?query=${query}&page=${page}&include_adult=false&language=es-AR&api_key=${KEY}`,
             )
-            return {...response.data, type: "series"}
+            return { ...response.data, type: 'series' }
         } catch (error) {
             console.error('Error al obtener datos:', error)
             throw new Error('Error al obtener datos')

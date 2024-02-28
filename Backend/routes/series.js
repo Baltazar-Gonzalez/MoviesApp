@@ -7,7 +7,7 @@ serieRoutes.get('/', (req, res) => {
 })
 
 //Populares
-serieRoutes.get('/populares', SerieController.getPopulars)
+serieRoutes.get('/populars', SerieController.getPopulars)
 
 //Al aire
 serieRoutes.get('/on-the-air', SerieController.getOnTheAir)

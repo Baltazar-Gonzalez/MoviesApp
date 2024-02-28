@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 
 const BASE_URL = process.env.REACT_APP_BACKEND_URL
 
@@ -9,23 +9,38 @@ const endpoints = {
     getNowPlayingMovies: '/movies/now-playing',
     getUpcomingMovies: '/movies/upcoming',
     getAnimationMovies: '/movies/animation',
-    getMoviesById: (id) => `/movies/${id}`,
+    getMovieById: (id) => `/movies/${id}`,
 
     //Series
     getSeries: `/series`,
     getPopularSeries: '/series/populars',
     getOnAirSeries: '/series/on-the-air',
-    getSeriesById: (id) => `/series/${id}`,
+    getSerieById: (id) => `/series/${id}`,
+
+    //Usuarios
+    getUsers: `/users`,
+    postUser: `/users`,
+    getAllUsers: `/users/all`,
+    postUserLogin: `/users/login`,
+    getUserById: (id) => `/users/${id}`,
+    deleteUserById: (id) => `/users/${id}`,
+
+    //Favoritos
+    getFavorites: `/favorites`,
+    postFavorite: `/favorites`,
+    getFavoriteByUserId: (userId) => `/favorites/${userId}`,
+    deleteFavoriteByUserId: (userId, id) => `/favorites/${userId}/${id}`,
 
     //Busqueda
-    getBySearch:(media, search, page) => `${media}/search?query=${search}`.concat(page ? `&page=${page}`:``)
+    getBySearch: (media, search, page) =>
+        `${media}/search?query=${search}`.concat(page ? `&page=${page}` : ``),
 }
 
 const instance = axios.create({
     baseURL: BASE_URL,
     headers: {
-         "Content-Type": "application/json"
-    }
+        'Content-Type': 'application/json',
+    },
 })
 
-export {instance, endpoints}
+export { instance, endpoints }
