@@ -5,15 +5,14 @@ import { Flex } from 'antd'
 import { Card } from './Card'
 import { Link } from 'react-router-dom'
 
-
-export function List({ title, category, media }) {
-  const [list, setlist] = useState([])
+export function List({ title, category }) {
+  const [list, setlist] = useState({})
 
   useEffect(() => {
     instance
       .get(category)
       .then((response) => {
-        setlist(response.data.results)
+        setlist(response.data)
       })
       .catch((error) => console.error('Error al obtener datos:', error))
   }, [])
@@ -22,10 +21,10 @@ export function List({ title, category, media }) {
     <section className="px-4 text-white bg-slate-800">
         <h1 className='py-3 text-xl font-bold'>{title}</h1>
         <Flex className='overflow-x-scroll' gap="middle">
-          {list.map(elem => {
+          {list.results?.map(elem => {
               return (
-                  <Link className='text-white' to={`/${media}/${elem.id}`}>
-                    <Card id={elem.id} media={media}/>
+                  <Link className='text-white' to={`/${list.type}/${elem.id}`}>
+                    <Card id={elem.id} media={list.type}/>
                   </Link>
                 )
           })
@@ -33,10 +32,4 @@ export function List({ title, category, media }) {
         </Flex>
     </section>
   )
-
-  /*  return (
-      <section className="px-4 text-white bg-slate-800">
-        
-      </section>
-    ); */
 }

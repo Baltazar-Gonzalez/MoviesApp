@@ -3,11 +3,22 @@ import axios from "axios"
 const BASE_URL = process.env.REACT_APP_BACKEND_URL
 
 const endpoints = {
+    //Movies
     getMovies: `/movies`,
-    getPopularMovies: '/movies/populares',
+    getPopularMovies: '/movies/populars',
     getNowPlayingMovies: '/movies/now-playing',
-    getAnimationMovies: '/movies/animacion',
+    getUpcomingMovies: '/movies/upcoming',
+    getAnimationMovies: '/movies/animation',
     getMoviesById: (id) => `/movies/${id}`,
+
+    //Series
+    getSeries: `/series`,
+    getPopularSeries: '/series/populars',
+    getOnAirSeries: '/series/on-the-air',
+    getSeriesById: (id) => `/series/${id}`,
+
+    //Busqueda
+    getBySearch:(media, search, page) => `${media}/search?query=${search}`.concat(page ? `&page=${page}`:``)
 }
 
 const instance = axios.create({

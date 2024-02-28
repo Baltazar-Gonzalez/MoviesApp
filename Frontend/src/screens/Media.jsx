@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-export function Media() {
+export function Media({ media }) {
     const [data, setData] = useState({})
-    const { media, id } = useParams()
+    const { id } = useParams()
 
     useEffect(() => {
         axios

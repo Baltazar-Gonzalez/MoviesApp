@@ -7,17 +7,14 @@ export function Home() {
             <List
                 title="Tendencias"
                 category={endpoints.getPopularMovies}
-                media="movies"
             />
             <List
                 title="En cartelera"
                 category={endpoints.getNowPlayingMovies}
-                media="movies"
             />
             <List
                 title="Animación"
                 category={endpoints.getAnimationMovies}
-                media="movies"
             />
         </>
     )

@@ -5,7 +5,7 @@ export class MovieController {
         try {
             const movies = await MovieModel.getPopulars()
             res.json(movies)
-        } catch (err) {
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }
@@ -13,7 +13,15 @@ export class MovieController {
         try {
             const movies = await MovieModel.getNowPlaying()
             res.json(movies)
-        } catch (err) {
+        } catch (error) {
+            res.status(500).json({ message: error.message })
+        }
+    }
+    static async getUpcoming(req, res) {
+        try {
+            const movies = await MovieModel.getUpcoming()
+            res.json(movies)
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }
@@ -21,7 +29,7 @@ export class MovieController {
         try {
             const movies = await MovieModel.getAnimationMovies()
             res.json(movies)
-        } catch (err) {
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }
@@ -30,16 +38,16 @@ export class MovieController {
         try {
             const movies = await MovieModel.getById(id)
             res.json(movies)
-        } catch (err) {
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }
     static async getBySearch(req, res) {
-        const { query } = req.query
+        const { query, page = 1 } = req.query
         try {
-            const movies = await MovieModel.getBySearch(query)
+            const movies = await MovieModel.getBySearch(query, page)
             res.json(movies)
-        } catch (err) {
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }

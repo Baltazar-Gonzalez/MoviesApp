@@ -32,7 +32,7 @@ app.use('/users', userRoutes)
 app.use('/favorites', favoritesRoutes)
 
 app.use('/', (req, res) => {
-    res.status(404).json({ message: error.message })
+    res.status(404).send("Ruta no encontrada")
 })
 
 main()

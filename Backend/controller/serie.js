@@ -5,7 +5,7 @@ export class SerieController {
         try {
             const series = await SerieModel.getPopulars()
             res.json(series)
-        } catch (err) {
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }
@@ -13,7 +13,7 @@ export class SerieController {
         try {
             const series = await SerieModel.getOnTheAir()
             res.json(series)
-        } catch (err) {
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }
@@ -22,16 +22,16 @@ export class SerieController {
         try {
             const movies = await SerieModel.getById(id)
             res.json(movies)
-        } catch (err) {
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }
     static async getBySearch(req, res) {
-        const { query } = req.query
+        const { query, page = 1 } = req.query
         try {
-            const movies = await SerieModel.getBySearch(query)
+            const movies = await SerieModel.getBySearch(query, page)
             res.json(movies)
-        } catch (err) {
+        } catch (error) {
             res.status(500).json({ message: error.message })
         }
     }

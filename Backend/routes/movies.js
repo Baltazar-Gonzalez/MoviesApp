@@ -7,13 +7,16 @@ movieRoutes.get('/', (req, res) => {
 })
 
 //Populares
-movieRoutes.get('/populares', MovieController.getPopulars)
+movieRoutes.get('/populars', MovieController.getPopulars)
 
 //En cartelera
 movieRoutes.get('/now-playing', MovieController.getNowPlaying)
 
+//Proximamente
+movieRoutes.get('/upcoming', MovieController.getUpcoming)
+
 //Animación
-movieRoutes.get('/animacion', MovieController.getAnimationMovies)
+movieRoutes.get('/animation', MovieController.getAnimationMovies)
 
 //Encontrar por busqueda
 movieRoutes.get('/search', MovieController.getBySearch)
