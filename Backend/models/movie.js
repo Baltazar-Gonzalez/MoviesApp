@@ -65,7 +65,7 @@ export class MovieModel {
   static async getById(id) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits&language=es-AR&api_key=${KEY}`,
+        `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits%2Cexternal_ids%2ckeywords&language=es-AR&api_key=${KEY}`,
       )
       return { ...response.data, type: 'movies' }
     } catch (error) {

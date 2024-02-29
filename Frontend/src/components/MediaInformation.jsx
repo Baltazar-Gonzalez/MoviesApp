@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../context/auth'
 
 import { Col, Row, Button } from 'antd'
+import { Crew } from './Crew'
 import { minutesConvert } from '../utils/functions'
 import { HeartOutlined, CaretRightOutlined } from '@ant-design/icons'
 
 export function MediaInformation({ data }) {
   const { isAuthenticated, user } = useAuth()
+  let name
+  const selectedJobs = ["Director", "Writer", "Novel", "Characters", "Screenplay"]
 
   function toggleFavorite() {
     instance
@@ -25,7 +28,7 @@ export function MediaInformation({ data }) {
   return (
     <div
       style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/w500/${data.backdrop_path})`,
+        backgroundImage: `url(https://image.tmdb.org/t/p/w1280/${data.backdrop_path})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -35,55 +38,73 @@ export function MediaInformation({ data }) {
         style={{
           background:
             'linear-gradient(to bottom right, rgba(0, 0, 0, .60), rgba(0, 0, 0, .45))',
-        }}
+        }
+      }
+      align="middle"
+      justify="center"
       >
         <Col md={6}>
-          <img src={`https://image.tmdb.org/t/p/w300/${data.poster_path}`} />
+          <img className='w-80' src={`https://image.tmdb.org/t/p/w780/${data.poster_path}`} />
         </Col>
         <Col md={18}>
-          <Row className="pl-10 h-full" align="middle">
+          <Row className="pl-10 mb-6" >
             <Col md={24}>
               <Row>
                 <Col md={24}>
-                  <h1>{`${data.title || data.name} (${data.release_date ? data.release_date.split('-')[0] : ''})`}</h1>
+                  <h1>{`${data.title || data.name} (${data.release_date ? data.release_date.split('-')[0] : data.first_air_date?.split('-')[0]})`}</h1>
                 </Col>
                 <Col className="mb-6 text-lg" md={24}>
                   <span>
                     {data.genres?.map((elem) => elem.name).join(', ')}
                   </span>
                   <span className="px-4">-</span>
-                  <span>{`${data.runtime ? minutesConvert(data.runtime) : false}`}</span>
+                  <span>{`${data.runtime ? minutesConvert(data.runtime) : ``}`}</span>
                 </Col>
-                <Col className="mb-6" md={24}>
-                  <Row className="h-16 gap-4" align="middle">
-                    <Col>
-                      <span className="text-4xl font-extrabold text-yellow-500">
-                        ⭐ {Number(data.vote_average).toFixed(1)}
-                      </span>
-                    </Col>
-                    <Col>
-                      <Button
-                        className="bg-white text-red-600"
-                        size="large"
-                        onClick={toggleFavorite}
-                        type="primary"
-                        icon={<HeartOutlined />}
-                      >
-                        {'Agregar a favoritos'}
-                      </Button>
-                    </Col>
-                    <Col>
-                      <a
-                        className="text-white text-lg"
-                        href={data.homepage}
-                        target="_blank"
-                      >
-                        <CaretRightOutlined /> Reproducir trailer
-                      </a>
-                    </Col>
-                  </Row>
+              </Row>
+            </Col>
+            <Col className="" md={24}>
+              <Row className="h-16 gap-4" align="middle">
+                <Col>
+                  <span className="text-4xl font-extrabold text-yellow-500">
+                    ⭐ {Number(data.vote_average).toFixed(1)}
+                   </span>
                 </Col>
-                <Col md={24}></Col>
+                 <Col>
+                   <Button
+                    className="bg-sky-950 text-slate-100 hover:bg-sky-100 hover:text-sky-950"
+                     size="large"
+                     onClick={toggleFavorite}
+                     type="primary"
+                     icon={<HeartOutlined />}
+                   >
+                     {'Agregar a favoritos'}
+                   </Button>
+                 </Col>
+                 <Col>
+                   <a
+                     className="text-white text-lg"
+                    href={data.homepage}
+                    target="_blank"
+                   >
+                    <CaretRightOutlined /> Reproducir trailer
+                  </a>
+                 </Col>
+              </Row>
+            </Col>
+            <Col md={24}>
+              <Row>
+                <Col className='my-2' md={24}>
+                  <span>{data.tagline}</span>
+                </Col>
+                <Col>
+                  <h2>Vista General</h2>
+                </Col>
+                <Col md={24}>
+                  <p>{data.overview}</p>
+                </Col>
+                <Col className='mt-5' md={24}>
+                  <Crew crew={data.credits?.crew}/>
+                </Col>
               </Row>
             </Col>
           </Row>

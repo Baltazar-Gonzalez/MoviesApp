@@ -13,3 +13,9 @@ export function minutesConvert(minutes) {
 
     return str.trim();
 }
+
+export const numberWithCommas = (number) => {
+    return '$' + number.toLocaleString('en-US', {
+        minimumFractionDigits: 2, 
+    });
+};
