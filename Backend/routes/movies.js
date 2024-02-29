@@ -3,7 +3,7 @@ import { MovieController } from '../controller/movie.js'
 const movieRoutes = Router()
 
 movieRoutes.get('/', (req, res) => {
-    res.status(200)
+  res.status(200)
 })
 
 //Populares
@@ -17,6 +17,9 @@ movieRoutes.get('/upcoming', MovieController.getUpcoming)
 
 //Animación
 movieRoutes.get('/animation', MovieController.getAnimationMovies)
+
+//Lista de generos de peliculas
+movieRoutes.get('/genres', MovieController.getMoviesGenresList)
 
 //Encontrar por busqueda
 movieRoutes.get('/search', MovieController.getBySearch)

@@ -3,31 +3,31 @@ import { NavBar } from './Navbar'
 const { Content, Footer } = Layout
 
 export function AppLayout({ children }) {
-    const items = [
-        {
-            label: '1',
-        },
-        {
-            label: '2',
-            style: {
-                backgroundColor: 'red',
-            },
-        },
-        {
-            label: '3',
-        },
-        {
-            label: '4',
-        },
-    ]
+  const items = [
+    {
+      label: '1',
+    },
+    {
+      label: '2',
+      style: {
+        backgroundColor: 'red',
+      },
+    },
+    {
+      label: '3',
+    },
+    {
+      label: '4',
+    },
+  ]
 
-    return (
-        <Layout>
-            <NavBar />
-            <Content>{children}</Content>
-        </Layout>
+  return (
+    <Layout>
+      <NavBar />
+      <Content>{children}</Content>
+    </Layout>
 
-        /*
+    /*
         <>
            /* <nav className="w-full p-4 flex justify-between items-center bg-cyan-900 h-16">
                 <Link className="text-white" to="/">
@@ -45,5 +45,5 @@ export function AppLayout({ children }) {
             
         </>
         */
-    )
+  )
 }

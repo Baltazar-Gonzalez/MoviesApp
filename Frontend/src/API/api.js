@@ -9,12 +9,14 @@ const endpoints = {
     getNowPlayingMovies: '/movies/now-playing',
     getUpcomingMovies: '/movies/upcoming',
     getAnimationMovies: '/movies/animation',
+    getMoviesGenresList: '/movies/genres',
     getMovieById: (id) => `/movies/${id}`,
 
     //Series
     getSeries: `/series`,
     getPopularSeries: '/series/populars',
     getOnAirSeries: '/series/on-the-air',
+    getSeriesGenresList: '/series/genres',
     getSerieById: (id) => `/series/${id}`,
 
     //Usuarios
@@ -28,7 +30,7 @@ const endpoints = {
     //Favoritos
     getFavorites: `/favorites`,
     postFavorite: `/favorites`,
-    getFavoriteByUserId: (userId) => `/favorites/${userId}`,
+    getFavoritesByUserId: (userId) => `/favorites/${userId}`,
     deleteFavoriteByUserId: (userId, id) => `/favorites/${userId}/${id}`,
 
     //Busqueda

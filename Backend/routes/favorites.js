@@ -3,7 +3,7 @@ import { FavoriteController } from '../controller/favorites.js'
 const favoritesRoutes = Router()
 
 favoritesRoutes.get('/', (req, res) => {
-    res.status(200)
+  res.status(200)
 })
 favoritesRoutes.post('/', FavoriteController.createFavorite)
 

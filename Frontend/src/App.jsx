@@ -12,63 +12,45 @@ import { MediaList } from './screens/MediaList'
 import { NotFound } from './screens/NotFound'
 
 function App() {
-    return (
-        <BrowserRouter>
-            <AppLayout>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/search/:media?" element={<Search />} />
+  return (
+    <BrowserRouter>
+      <AppLayout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/search/:media?" element={<Search />} />
 
-                    <Route
-                        path="/movies/popular"
-                        element={
-                            <MediaList category={endpoints.getPopularMovies} />
-                        }
-                    />
-                    <Route
-                        path="/movies/cartelera"
-                        element={
-                            <MediaList
-                                category={endpoints.getNowPlayingMovies}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/movies/proximamente"
-                        element={
-                            <MediaList category={endpoints.getUpcomingMovies} />
-                        }
-                    />
+          <Route
+            path="/movies/popular"
+            element={<MediaList category={endpoints.getPopularMovies} />}
+          />
+          <Route
+            path="/movies/cartelera"
+            element={<MediaList category={endpoints.getNowPlayingMovies} />}
+          />
+          <Route
+            path="/movies/proximamente"
+            element={<MediaList category={endpoints.getUpcomingMovies} />}
+          />
 
-                    <Route
-                        path="/series/popular"
-                        element={
-                            <MediaList category={endpoints.getPopularSeries} />
-                        }
-                    />
-                    <Route
-                        path="/series/en-emision"
-                        element={
-                            <MediaList category={endpoints.getOnAirSeries} />
-                        }
-                    />
+          <Route
+            path="/series/popular"
+            element={<MediaList category={endpoints.getPopularSeries} />}
+          />
+          <Route
+            path="/series/en-emision"
+            element={<MediaList category={endpoints.getOnAirSeries} />}
+          />
 
-                    <Route
-                        path="/movies/:id"
-                        element={<Media media="movies" />}
-                    />
-                    <Route
-                        path="/series/:id"
-                        element={<Media media="series" />}
-                    />
-                    <Route path="/users/:id" element={<User />} />
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
-            </AppLayout>
-        </BrowserRouter>
-    )
+          <Route path="/movies/:id" element={<Media media="movies" />} />
+          <Route path="/series/:id" element={<Media media="series" />} />
+          <Route path="/users/:id" element={<User />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AppLayout>
+    </BrowserRouter>
+  )
 }
 
 export default App
