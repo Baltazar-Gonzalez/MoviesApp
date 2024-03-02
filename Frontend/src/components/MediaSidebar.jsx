@@ -22,14 +22,14 @@ export function MediaSidebar({data}) {
                     )}
                     {twitter_id && (
                         <Col>
-                            <a className="text-sky-950 text-2xl ml-3" href={`https://www.facebook.com/${facebook_id}`} target="_blank">
+                            <a className="text-sky-950 text-2xl ml-3" href={`https://www.twitter.com/${twitter_id}`} target="_blank">
                                 <FaXTwitter />
                             </a>
                         </Col>
                     )}
                     {instagram_id && (
                         <Col>
-                            <a className="text-sky-950 text-2xl ml-3" href={`https://www.facebook.com/${facebook_id}`} target="_blank">
+                            <a className="text-sky-950 text-2xl ml-3" href={`https://www.instagram.com/${instagram_id}`} target="_blank">
                                 <FaInstagram />
                             </a>
                         </Col>
@@ -82,7 +82,7 @@ export function MediaSidebar({data}) {
                     <span className="font-bold">Presupuesto</span>
                 </Col>
                 <Col>
-                    <span>{numberWithCommas(data.budget)}</span>
+                    <span>{data.budget ? numberWithCommas(data.budget): null}</span>
                 </Col>
               </Row>
             </Col>
@@ -92,7 +92,7 @@ export function MediaSidebar({data}) {
                     <span className="font-bold">Ingresos</span>
                 </Col>
                 <Col>
-                    <span>{numberWithCommas(data.revenue)}</span>
+                    <span>{data.revenue ? numberWithCommas(data.revenue): null}</span>
                 </Col>
               </Row>
             </Col>
@@ -106,8 +106,8 @@ export function MediaSidebar({data}) {
             <Col md={24}>  
                 <Row className="gap-2">
                     {
-                        data.keywords.keywords.length > 0 ? 
-                        data.keywords.keywords.map(key => (
+                        data.keywords.keywords?.length > 0 ? 
+                        data.keywords.keywords?.map(key => (
                             <Col className="bg-slate-200 text-xs px-3 py-1 rounded">
                                 {key.name}
                             </Col>

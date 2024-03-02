@@ -7,10 +7,6 @@ import { minutesConvert } from '../utils/functions'
 import { HeartOutlined, CaretRightOutlined } from '@ant-design/icons'
 
 export function MediaInformation({ data }) {
-  const { isAuthenticated, user } = useAuth()
-  let name
-  const selectedJobs = ["Director", "Writer", "Novel", "Characters", "Screenplay"]
-
   function toggleFavorite() {
     instance
       .post(endpoints.postFavorite, {

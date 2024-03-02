@@ -41,7 +41,7 @@ export class SerieModel {
   static async getById(id) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/tv/${id}?append_to_response=credits&language=es-AR&api_key=${KEY}`,
+        `https://api.themoviedb.org/3/tv/${id}?append_to_response=credits%2Cexternal_ids%2ckeywords%2cvideos%2crecommendations&language=es-AR&api_key=${KEY}`,
       )
       return { ...response.data, type: 'series' }
     } catch (error) {

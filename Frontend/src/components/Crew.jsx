@@ -2,7 +2,7 @@ import { Col, Row } from 'antd'
 
 
 export function Crew({ crew = [] }) {
-    const selectedJobs = ["Director", "Writer", "Novel", "Characters", "Screenplay"];
+    const selectedJobs = ["Director", "Characters", "Writer", "Novel", "Screenplay", "Story"];
     const seenPersons = {};
 
     const sortedCrew = crew
@@ -10,7 +10,7 @@ export function Crew({ crew = [] }) {
         .sort((a, b) => selectedJobs.indexOf(a.job) - selectedJobs.indexOf(b.job));
 
     return (
-        <Row>
+        <Row gutter={[0, 16]}>
             {sortedCrew.map(elem => {
                 if (seenPersons[elem.name]) {
                     return null;

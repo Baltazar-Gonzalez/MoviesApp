@@ -6,3 +6,12 @@
     margin: 0;
     box-sizing: border-box;
 }
+.profile_default{
+    width: 138px;
+    height: 175px;
+    background-image: url(./assets/default-cast.svg);
+    background-position: center;
+    background-size: 64px;
+    background-repeat: no-repeat;
+    background-color: #dbdbdb;
+}

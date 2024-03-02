@@ -65,9 +65,12 @@ export class MovieModel {
   static async getById(id) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits%2Cexternal_ids%2ckeywords&language=es-AR&api_key=${KEY}`,
+        `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits%2Cexternal_ids%2ckeywords%2Crecommendations&language=es-AR&api_key=${KEY}`,
       )
-      return { ...response.data, type: 'movies' }
+      const videos = await axios.get(
+        `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${KEY}`
+      )
+      return { ...response.data, videos: {...videos.data}, type: 'movies' }
     } catch (error) {
       console.error('Error al obtener datos:', error)
       throw new Error('Error al obtener datos')
