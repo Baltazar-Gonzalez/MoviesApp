@@ -2,16 +2,18 @@ import { SerieModel } from '../models/serie.js'
 
 export class SerieController {
   static async getPopulars(req, res) {
+    const { page = 1 } = req.query
     try {
-      const series = await SerieModel.getPopulars()
+      const series = await SerieModel.getPopulars(page)
       res.json(series)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
   }
   static async getOnTheAir(req, res) {
+    const { page = 1 } = req.query
     try {
-      const series = await SerieModel.getOnTheAir()
+      const series = await SerieModel.getOnTheAir(page)
       res.json(series)
     } catch (error) {
       res.status(500).json({ message: error.message })

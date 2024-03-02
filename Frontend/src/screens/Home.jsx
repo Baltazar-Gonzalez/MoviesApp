@@ -5,10 +5,12 @@ import { Header } from '../components/Header.jsx'
 export function Home() {
   return (
     <>
-      <Header/>
-      <List title="Tendencias" category={endpoints.getPopularMovies} />
-      <List title="En cartelera" category={endpoints.getNowPlayingMovies} />
-      <List title="Animación" category={endpoints.getAnimationMovies} />
+      <Header />
+      <List title="Tendencias" category={endpoints.getTrendingList} />
     </>
   )
 }
+/*
+    <List title="En cartelera" category={endpoints.getNowPlayingMovies} />
+      <List title="Animación" category={endpoints.getAnimationMovies} />
+*/

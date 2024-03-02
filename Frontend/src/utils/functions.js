@@ -14,8 +14,16 @@ export function minutesConvert(minutes) {
     return str.trim();
 }
 
-export const numberWithCommas = (number) => {
+export function numberWithCommas(number){
     return '$' + number.toLocaleString('en-US', {
         minimumFractionDigits: 2, 
     });
 };
+
+export function changeDateFormat(date ){
+    console.log(date)
+    const newDate = new Date(date);
+    const longFormat = new Intl.DateTimeFormat('es-ES', {year: 'numeric', month: 'long', day: 'numeric'})
+
+    return longFormat.format(newDate)
+} 

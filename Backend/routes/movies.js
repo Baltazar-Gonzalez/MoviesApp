@@ -18,6 +18,9 @@ movieRoutes.get('/upcoming', MovieController.getUpcoming)
 //Animación
 movieRoutes.get('/animation', MovieController.getAnimationMovies)
 
+//Lista de tendencias
+movieRoutes.get('/trending', MovieController.getTrendingList)
+
 //Lista de generos de peliculas
 movieRoutes.get('/genres', MovieController.getMoviesGenresList)
 

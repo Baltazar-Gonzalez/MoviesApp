@@ -18,7 +18,15 @@ export function List({ title, category, favorite = false }) {
       .catch((error) => console.error('Error al obtener datos:', error))
   }, [])
   return (
-    <section className="px-4 text-white bg-slate-800">
+    <section
+      className="px-[40px] pt-[30px] text-black"
+      style={{
+        backgroundImage: `url(./src/assets/trend.svg)`,
+        backgroundSize: 'auto 300px',
+        backgroundPosition: 'center 140px',
+        backgroundRepeat: 'repeat no-repeat',
+      }}
+    >
       <h1 className="py-3 text-xl font-bold">{title}</h1>
       <Flex className="overflow-x-scroll" gap="middle">
         {list.results?.map((elem) => {
@@ -34,9 +42,9 @@ export function List({ title, category, favorite = false }) {
             <Link
               key={elem.id}
               className="text-white"
-              to={`/${list.type}/${elem.id}`}
+              to={`/${elem.media_type || list.type}/${elem.id}`}
             >
-              <Card data={elem} media={list.type} />
+              <Card data={elem} media={elem.media_type || list.type} />
             </Link>
           )
         })}

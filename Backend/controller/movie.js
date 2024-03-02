@@ -2,32 +2,45 @@ import { MovieModel } from '../models/movie.js'
 
 export class MovieController {
   static async getPopulars(req, res) {
+    const {page = 1 } = req.query
     try {
-      const movies = await MovieModel.getPopulars()
+      const movies = await MovieModel.getPopulars(page)
       res.json(movies)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
   }
   static async getNowPlaying(req, res) {
+    const {page = 1 } = req.query
     try {
-      const movies = await MovieModel.getNowPlaying()
+      const movies = await MovieModel.getNowPlaying(page)
       res.json(movies)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
   }
   static async getUpcoming(req, res) {
+    const {page = 1 } = req.query
     try {
-      const movies = await MovieModel.getUpcoming()
+      const movies = await MovieModel.getUpcoming(page)
       res.json(movies)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
   }
   static async getAnimationMovies(req, res) {
+    const {page = 1 } = req.query
     try {
-      const movies = await MovieModel.getAnimationMovies()
+      const movies = await MovieModel.getAnimationMovies(page)
+      res.json(movies)
+    } catch (error) {
+      res.status(500).json({ message: error.message })
+    }
+  }
+  static async getTrendingList(req, res) {
+    const {page = 1 } = req.query
+    try {
+      const movies = await MovieModel.getTrendingList(page)
       res.json(movies)
     } catch (error) {
       res.status(500).json({ message: error.message })

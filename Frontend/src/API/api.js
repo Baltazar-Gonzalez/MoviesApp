@@ -5,17 +5,18 @@ const BASE_URL = process.env.REACT_APP_BACKEND_URL
 const endpoints = {
     //Movies
     getMovies: `/movies`,
-    getPopularMovies: '/movies/populars',
-    getNowPlayingMovies: '/movies/now-playing',
-    getUpcomingMovies: '/movies/upcoming',
-    getAnimationMovies: '/movies/animation',
+    getPopularMovies: (page) => '/movies/populars'.concat(page ? `?page=${page}` : ``),
+    getNowPlayingMovies: (page) => '/movies/now-playing'.concat(page ? `?page=${page}` : ``),
+    getUpcomingMovies: (page) => '/movies/upcoming'.concat(page ? `?page=${page}` : ``),
+    getAnimationMovies: (page) => '/movies/animation'.concat(page ? `?page=${page}` : ``),
+    getTrendingList: '/movies/trending',
     getMoviesGenresList: '/movies/genres',
     getMovieById: (id) => `/movies/${id}`,
 
     //Series
     getSeries: `/series`,
-    getPopularSeries: '/series/populars',
-    getOnAirSeries: '/series/on-the-air',
+    getPopularSeries: (page) => '/series/populars'.concat(page ? `?page=${page}` : ``),
+    getOnAirSeries: (page) => '/series/on-the-air'.concat(page ? `?page=${page}` : ``),
     getSeriesGenresList: '/series/genres',
     getSerieById: (id) => `/series/${id}`,
 

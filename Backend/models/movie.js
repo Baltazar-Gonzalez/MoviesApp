@@ -2,10 +2,10 @@ import axios from 'axios'
 import { KEY } from '../config.js'
 
 export class MovieModel {
-  static async getPopulars() {
+  static async getPopulars(page) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/popular?language=es-AR&api_key=${KEY}`,
+        `https://api.themoviedb.org/3/movie/popular?page=${page}&language=es-AR&api_key=${KEY}`,
       )
       return { ...response.data, type: 'movies' }
     } catch (error) {
@@ -14,10 +14,10 @@ export class MovieModel {
     }
   }
 
-  static async getNowPlaying() {
+  static async getNowPlaying(page) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/now_playing?language=es-AR&api_key=${KEY}`,
+        `https://api.themoviedb.org/3/movie/now_playing?page=${page}&language=es-AR&api_key=${KEY}`,
       )
       return { ...response.data, type: 'movies' }
     } catch (error) {
@@ -26,10 +26,10 @@ export class MovieModel {
     }
   }
 
-  static async getUpcoming() {
+  static async getUpcoming(page) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/upcoming?language=es-AR&region=AR&api_key=${KEY}`,
+        `https://api.themoviedb.org/3/movie/upcoming?page=${page}&language=es-AR&region=AR&api_key=${KEY}`,
       )
       return { ...response.data, type: 'movies' }
     } catch (error) {
@@ -38,12 +38,24 @@ export class MovieModel {
     }
   }
 
-  static async getAnimationMovies() {
+  static async getAnimationMovies(page) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?language=es-AR&sort_by=popularity.desc&with_genres=16&api_key=${KEY}`,
+        `https://api.themoviedb.org/3/discover/movie?page=${page}&language=es-AR&sort_by=popularity.desc&with_genres=16&api_key=${KEY}`,
       )
       return { ...response.data, type: 'movies' }
+    } catch (error) {
+      console.error('Error al obtener datos:', error)
+      throw new Error('Error al obtener datos')
+    }
+  }
+
+  static async getTrendingList(page) {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/trending/all/day?page=${page}&language=es-AR&api_key=${KEY}`,
+      )
+      return { ...response.data}
     } catch (error) {
       console.error('Error al obtener datos:', error)
       throw new Error('Error al obtener datos')

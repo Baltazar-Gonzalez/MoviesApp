@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { instance, endpoints } from '../API/api'
+import { MOVIES, SERIES, CARD_URL } from '../utils/constants'
 
 export function FavoriteCard({ id, media }) {
   const [data, setData] = useState({})
 
   useEffect(() => {
     let endpoint = ''
-    if (media === 'movies') {
+    if (media === MOVIES) {
       endpoint = endpoints.getMovieById(id)
-    } else if (media === 'series') {
+    } else if (media === SERIES) {
       endpoint = endpoints.getSerieById(id)
     }
     instance
@@ -19,12 +20,11 @@ export function FavoriteCard({ id, media }) {
       .catch((error) => console.error('Error al obtener datos:', error))
   }, [id])
 
-  console.log(data)
   return (
-    <div key={data.id} style={{ minHeight: '360px' }}>
+    <div key={data.id} className="min-h-[360px]">
       <img
         className="h-56 max-w-none mb-2"
-        src={`https://image.tmdb.org/t/p/w154/${data.poster_path}`}
+        src={CARD_URL.concat(data.poster_path)}
       />
       <span className="font-bold">{data.title || data.name}</span>
       <p className="text-xs text-red-300">
