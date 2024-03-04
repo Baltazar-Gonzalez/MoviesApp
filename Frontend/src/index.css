@@ -15,3 +15,33 @@
     background-repeat: no-repeat;
     background-color: #dbdbdb;
 }
+.poster_default{
+    width: 150px;
+    height: 225px;
+    background-image: url(./assets/default-poster.svg);
+    background-position: center;
+    background-size: 64px;
+    background-repeat: no-repeat;
+    background-color: #dbdbdb;
+}
+.small_poster_default{
+    width: 94px;
+    height: 141px;
+    background-image: url(./assets/default-poster.svg);
+    background-position: center;
+    background-size: 64px;
+    background-repeat: no-repeat;
+    background-color: #dbdbdb;
+}
+.small_backdrop_default{
+    width: 250px;
+    height: 141px;
+    background-image: url(./assets/default-poster.svg);
+    background-position: center;
+    background-size: 64px;
+    background-repeat: no-repeat;
+    background-color: #dbdbdb;
+}
+.ant-menu-title-content{
+    color: #fff;
+}

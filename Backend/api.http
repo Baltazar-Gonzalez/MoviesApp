@@ -41,7 +41,6 @@ POST http://localhost:5500/users HTTP/1.1
 content-type: application/json
 
 {
-    "id": 1,
     "name": "balta",
     "email": "aa@gmail.com",
     "image": "...",
@@ -53,10 +52,9 @@ POST http://localhost:5500/favorites HTTP/1.1
 content-type: application/json
 
 {
-    "id": 2,
-    "favId": 82452,
+    "favId": 82453,
     "type": "series",
-    "userId": 1
+    "userId": 2
 }
 
 
@@ -69,6 +67,10 @@ GET  http://localhost:5500/users/1 HTTP/1.1
 
 ### Acceder a favoritos del usuario
 GET  http://localhost:5500/favorites/1 HTTP/1.1
+
+### Acceder a favoritos del usuario por favId
+GET  http://localhost:5500/favorites/1/693134 HTTP/1.1
+
 
 
 

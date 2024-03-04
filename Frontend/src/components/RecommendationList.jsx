@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { SMALL_BACKDROP_ULR } from '../utils/constants'
 
 export function RecommendationList({ recommendations, media }) {
+  //Retorna null si no hay recomendaciones
   if (!recommendations) {
     return null
   }
@@ -22,10 +23,15 @@ export function RecommendationList({ recommendations, media }) {
                   to={`/${media}/${recommend.id}`}
                   preventScrollReset={false}
                 >
-                  <img
-                    className="rounded-lg"
-                    src={SMALL_BACKDROP_ULR.concat(recommend.backdrop_path)}
-                  />
+                  {recommend.backdrop_path ? (
+                    <img
+                      className="rounded-lg"
+                      src={SMALL_BACKDROP_ULR.concat(recommend.backdrop_path)}
+                    />
+                  ):(
+                    <div className='small_backdrop_default' />
+                  )
+                }
                   <Row>
                     <Col md={18}>
                       <span>{recommend.title || recommend.name}</span>

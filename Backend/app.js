@@ -10,15 +10,15 @@ const app = express()
 const PORT = process.env.PORT ?? 5500
 
 async function main() {
-    try {
-        await sequelize.sync({ force: true })
-        console.log('Connection has been established successfully')
-        app.listen(PORT, () =>
-            console.log(`server listening on port http://localhost:${PORT}`),
-        )
-    } catch (err) {
-        console.log('Unable to connect to the database', err)
-    }
+  try {
+    await sequelize.sync()
+    console.log('Connection has been established successfully')
+    app.listen(PORT, () =>
+      console.log(`server listening on port http://localhost:${PORT}`),
+    )
+  } catch (err) {
+    console.log('Unable to connect to the database', err)
+  }
 }
 
 //Middlewares
@@ -32,7 +32,7 @@ app.use('/users', userRoutes)
 app.use('/favorites', favoritesRoutes)
 
 app.use('/', (req, res) => {
-    res.status(404).send("Ruta no encontrada")
+  res.status(404).send('Ruta no encontrada')
 })
 
 main()

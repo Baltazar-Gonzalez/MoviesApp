@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { instance, endpoints } from '../API/api'
 import { MOVIES, SERIES, CARD_URL } from '../utils/constants'
+import { Row, Col } from 'antd'
 
 export function FavoriteCard({ id, media }) {
   const [data, setData] = useState({})
 
+  //Trae la información del favorito
   useEffect(() => {
     let endpoint = ''
     if (media === MOVIES) {
@@ -21,7 +23,32 @@ export function FavoriteCard({ id, media }) {
   }, [id])
 
   return (
-    <div key={data.id} className="min-h-[360px]">
+      <Row key={data.id} className="w-[152px] min-h-[325px] rounded-lg shadow-lg content-start gap-3 text-black" style={{border: "1px solid #dbdbdb"}}>
+        <Col className="max-h-[225px]" md={24}>
+          <img
+            className="max-w-none mb-2 rounded-t-lg"
+            src={`${CARD_URL.concat(data.poster_path)}`}
+          />
+        </Col>
+        <Col className='px-[10px] py-[8px]' md={24}>
+          <Row>
+            <Col md={24}>
+              <span className="font-bold">{data.title || data.name}</span>
+            </Col>
+            <Col md={24}>
+                  <span className="text-amber-500 font-extrabold ">
+                    ⭐ {Number(data.vote_average).toFixed(1)}
+                  </span>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+  )
+}
+
+/*
+
+<div key={data.id} className="min-h-[360px]">
       <img
         className="h-56 max-w-none mb-2"
         src={CARD_URL.concat(data.poster_path)}
@@ -37,5 +64,5 @@ export function FavoriteCard({ id, media }) {
         </span>
       </div>
     </div>
-  )
-}
+
+  */

@@ -10,7 +10,3 @@ export function Home() {
     </>
   )
 }
-/*
-    <List title="En cartelera" category={endpoints.getNowPlayingMovies} />
-      <List title="Animación" category={endpoints.getAnimationMovies} />
-*/

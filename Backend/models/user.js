@@ -6,6 +6,7 @@ export const UserModel = sequelize.define('users', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
   },
   name: {
     type: DataTypes.STRING,
@@ -24,11 +25,12 @@ export const UserModel = sequelize.define('users', {
   },
 })
 
+//Un usuario tiene muchos favoritos
 UserModel.hasMany(FavoriteModel, {
   foreignKey: 'userId',
   sourceKey: 'id',
 })
-
+//Un favorito pertenece a un usuario
 FavoriteModel.belongsTo(UserModel, {
   foreignKey: 'userId',
   targetKey: 'id',

@@ -6,6 +6,7 @@ export function MediaProvider({ children }) {
   const [moviesGenresList, setMoviesGenresList] = useState({})
   const [seriesGenresList, setSeriesGenresList] = useState({})
 
+  //Trae y guarda en un state todos los generos de peliculas
   async function getMoviesGenres() {
     try {
       const {
@@ -23,6 +24,7 @@ export function MediaProvider({ children }) {
     }
   }
 
+  //Trae y guarda en un state todos los generos de series
   async function getSeriesGenres() {
     try {
       const {

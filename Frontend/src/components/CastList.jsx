@@ -2,9 +2,11 @@ import { Row, Col, Flex } from 'antd'
 import { CAST_URL } from '../utils/constants'
 
 export function CastList({ credits }) {
+  //Retorna null si no hay data
   if (!credits || !credits.cast) {
     return null
   }
+  
   return (
     <Row className="px-4 pb-7 ">
       <Col md={24}>

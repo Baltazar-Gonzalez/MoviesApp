@@ -10,6 +10,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <MediaProvider>
       <App />
     </MediaProvider>
-    ,
   </AuthProvider>,
 )

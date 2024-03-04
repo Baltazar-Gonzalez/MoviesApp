@@ -4,8 +4,15 @@ import { Row, Col } from 'antd'
 import { MOVIES, SERIES, MOVIE, TV, CARD_URL } from '../utils/constants'
 
 export function Card({ data, media }) {
-  const { moviesGenresList = {}, seriesGenresList = {} } =
-    useContext(MediaContext)
+  //Retorna null si no hay data
+  if (!data || !data.genre_ids ) {
+    return null
+  }
+
+  //Trae las listas de generos
+  const { moviesGenresList = {}, seriesGenresList = {} } = useContext(MediaContext)
+
+  //Verifica que lista de generos usar
   let genreList
   if (media === MOVIES || media === MOVIE) {
     genreList = moviesGenresList
@@ -14,13 +21,20 @@ export function Card({ data, media }) {
   }
 
   return (
-    <Row key={data.id} className="min-h-[360px] content-start gap-3 text-black">
-      <Col className="max-h-[225px]" md={24}>
-        <img
-          className="max-w-none mb-2 rounded-md"
-          src={`${CARD_URL.concat(data.poster_path)}`}
-        />
-      </Col>
+    <Row key={data.id} className="min-h-[360px] w-[150px] content-start gap-3 text-black">
+      {
+        data?.poster_path ? (
+          <Col className="max-h-[225px]" md={24}>
+            <img
+              className="max-w-none mb-2 rounded-md"
+              src={`${CARD_URL.concat(data.poster_path)}`}
+            />
+          </Col>
+        ):(
+          <div className='poster_default'/>
+        )
+      }
+      
       <Col md={24}>
         <Row>
           <Col md={24}>
@@ -28,7 +42,7 @@ export function Card({ data, media }) {
           </Col>
           <Col md={24}>
             <p className="text-xs text-red-300">
-              {`${genreList[data.genre_ids[0]]} ${genreList[data.genre_ids[1]] ?? ''}`}
+              {`${[genreList[data.genre_ids[0]], genreList[data.genre_ids[1]]].join(" - ") ?? ''}`}
             </p>
           </Col>
           <Col md={24}>

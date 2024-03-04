@@ -21,27 +21,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/search/:media?" element={<Search />} />
 
-          <Route
-            path="/movies/popular"
-            element={<MediaList category={endpoints.getPopularMovies} />}
-          />
-          <Route
-            path="/movies/cartelera"
-            element={<MediaList category={endpoints.getNowPlayingMovies} />}
-          />
-          <Route
-            path="/movies/proximamente"
-            element={<MediaList category={endpoints.getUpcomingMovies} />}
-          />
-
-          <Route
-            path="/series/popular"
-            element={<MediaList category={endpoints.getPopularSeries} />}
-          />
-          <Route
-            path="/series/en-emision"
-            element={<MediaList category={endpoints.getOnAirSeries} />}
-          />
+          <Route path="/movies/popular" element={<MediaList category={endpoints.getPopularMovies} title="Peliculas populares" />}/>
+          <Route path="/movies/cartelera" element={<MediaList category={endpoints.getNowPlayingMovies} title="Peliculas en cartelera"/>}/>
+          <Route path="/movies/proximamente" element={<MediaList category={endpoints.getUpcomingMovies} title="Proximamente"/>}/>
+          <Route path="/series/popular" element={<MediaList category={endpoints.getPopularSeries} title="Series populares"/>}/>
+          <Route path="/series/en-emision" element={<MediaList category={endpoints.getOnAirSeries} title="Series en emisión"/>}/>
 
           <Route path="/movies/:id" element={<Media media="movies" />} />
           <Route path="/series/:id" element={<Media media="series" />} />

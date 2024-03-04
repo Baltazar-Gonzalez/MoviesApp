@@ -1,25 +1,62 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { instance, endpoints } from '../API/api'
 import { useAuth } from '../context/auth'
-import { Col, Row, Button } from 'antd'
+import { Col, Row, Button, notification } from 'antd'
 import { Crew } from './Crew'
 import { minutesConvert } from '../utils/functions'
-import { HeartOutlined, CaretRightOutlined } from '@ant-design/icons'
+import { HeartOutlined, HeartFilled, CaretRightOutlined } from '@ant-design/icons'
 import { BACKDROP_URL, POSTER_URL } from '../utils/constants'
 
 export function MediaInformation({ data }) {
-  function toggleFavorite() {
+  const [favorite, setFavorite] = useState(false)
+  const { user, isAuthenticated } = useAuth()
+  const navigate = useNavigate()
+  const [api, contextHolder] = notification.useNotification();
+
+  //Configuración de las notificaciones
+  const openNotificationWithIcon = (type, message = "Parametros invalidos") => {
+    api[type]({
+      message,
+    });
+  }
+
+  //Agrega favorito al usuario
+  function addFavorite() {
     instance
       .post(endpoints.postFavorite, {
-        id: 1,
-        favId: id,
-        type: media,
-        userId: userId,
+        favId: data.id,
+        type: data.type,
+        userId: user.id,
       })
       .then((response) => {
-        console.log('Agregado a favoritos')
+        openNotificationWithIcon("success", response.data.message)
+        setFavorite(true)
       })
       .catch((error) => console.error('Error al agregar en favoritos:', error))
   }
+
+  //Elimina favorito del usuario
+  function deleteFavorite() {
+    instance
+      .get(endpoints.deleteFavoriteByUserId(user?.id, data?.id))
+      .then((response) => {
+        console.log(response)
+        openNotificationWithIcon("error", response.data.message)
+        setFavorite(false)
+      })
+      .catch((error) => console.error('Error al eliminar de favoritos:', error))
+  }
+
+  //Verifica si es favorito del usuario
+  useEffect(()=>{
+    instance
+      .get(endpoints.getIsUserFavorite(user?.id, data?.id))
+      .then((response) => {
+        setFavorite(true)
+      })
+      .catch((error) => setFavorite(false))
+  }, [data, user])
 
   return (
     <div
@@ -29,6 +66,7 @@ export function MediaInformation({ data }) {
         backgroundPosition: 'center',
       }}
     >
+      {contextHolder}
       <Row
         className="px-10 py-8 text-white"
         style={{
@@ -43,12 +81,12 @@ export function MediaInformation({ data }) {
         </Col>
         <Col md={18}>
           <Row className="pl-10 mb-6">
-            <Col md={24}>
+            <Col xs={24}>
               <Row>
-                <Col md={24}>
-                  <h1>{`${data.title || data.name} (${data.release_date ? data.release_date.split('-')[0] : data.first_air_date?.split('-')[0]})`}</h1>
+                <Col xs={24}>
+                  <h1>{`${(data?.title || data?.name) ?? ""} (${(data?.release_date ? data?.release_date.split('-')[0] : data?.first_air_date?.split('-')[0]) ?? ""})`}</h1>
                 </Col>
-                <Col className="mb-6 text-lg" md={24}>
+                <Col className="mb-6 text-lg" xs={24}>
                   <span>
                     {data.genres?.map((elem) => elem.name).join(', ')}
                   </span>
@@ -57,23 +95,38 @@ export function MediaInformation({ data }) {
                 </Col>
               </Row>
             </Col>
-            <Col className="" md={24}>
+            <Col className="" xs={24}>
               <Row className="h-16 gap-4" align="middle">
                 <Col>
                   <span className="text-4xl font-extrabold text-yellow-500">
-                    ⭐ {Number(data.vote_average).toFixed(1)}
+                    ⭐ {Number(data.vote_average ?? 0).toFixed(1)}
                   </span>
                 </Col>
                 <Col>
+                {
+                  favorite ? (
+                    <Button
+                    className="bg-sky-100 text-sky-950 hover:bg-red-700 hover:text-white"
+                    size="large"
+                    onClick={deleteFavorite}
+                    type="primary"
+                    icon={<HeartFilled />}
+                    >
+                      {'Eliminar de favoritos'}
+                    </Button>
+                  ):(
                   <Button
                     className="bg-sky-950 text-slate-100 hover:bg-sky-100 hover:text-sky-950"
                     size="large"
-                    onClick={toggleFavorite}
+                    onClick={isAuthenticated() ? addFavorite : e => navigate("/login")}
                     type="primary"
                     icon={<HeartOutlined />}
-                  >
-                    {'Agregar a favoritos'}
-                  </Button>
+                    >
+                      {'Agregar a favoritos'}
+                    </Button>
+                  )
+                }
+                  
                 </Col>
                 <Col>
                   <a
@@ -86,18 +139,18 @@ export function MediaInformation({ data }) {
                 </Col>
               </Row>
             </Col>
-            <Col md={24}>
+            <Col xs={24}>
               <Row>
-                <Col className="my-2" md={24}>
+                <Col className="my-2" xs={24}>
                   <span>{data.tagline}</span>
                 </Col>
                 <Col>
                   <h2>Vista General</h2>
                 </Col>
-                <Col md={24}>
+                <Col xs={24}>
                   <p>{data.overview}</p>
                 </Col>
-                <Col className="mt-5" md={24}>
+                <Col className="mt-5" xs={24}>
                   <Crew crew={data.credits?.crew} />
                 </Col>
               </Row>

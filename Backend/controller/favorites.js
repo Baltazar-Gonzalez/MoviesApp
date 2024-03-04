@@ -1,8 +1,9 @@
 import { FavoriteModel } from '../models/favorites.js'
 
 export class FavoriteController {
+  //Creación de favorito
   static async createFavorite(req, res) {
-    const { id, favId, type, userId } = req.body
+    const { favId, type, userId } = req.body
     try {
       const existingFavorite = await FavoriteModel.findOne({
         where: {
@@ -12,23 +13,40 @@ export class FavoriteController {
       })
 
       if (existingFavorite) {
-        res.status(400).json({
+        return res.status(400).json({
           message: 'El usuario ya tiene este elemento en favoritos',
         })
       }
 
       const newFavorite = await FavoriteModel.create({
-        id,
         favId,
         type,
         userId,
       })
 
-      res.status(200).json(newFavorite)
+      return res
+        .status(200)
+        .json({ newFavorite, message: 'Agregado a favoritos' })
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      return res.status(500).json({ message: error.message })
     }
   }
+  //Eliminación de favorito
+  static async deleteFavorite(req, res) {
+    const { userId, favId } = req.params
+    try {
+      await FavoriteModel.destroy({
+        where: {
+          userId,
+          favId,
+        },
+      })
+      return res.status(200).json({ message: 'Eliminado de favoritos' })
+    } catch (error) {
+      return res.status(500).json({ message: error.message })
+    }
+  }
+  //Busqueda de favoritos
   static async getByUserId(req, res) {
     const { userId } = req.params
     const page = req.query.page ?? 1
@@ -49,9 +67,30 @@ export class FavoriteController {
         total_results: count,
       }
 
-      res.status(200).json(favorites)
+      return res.status(200).json(favorites)
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      return res.status(500).json({ message: error.message })
+    }
+  }
+  //Verificación de favorito
+  static async isUserFavorite(req, res) {
+    const { userId, favId } = req.params
+    try {
+      const existingFavorite = await FavoriteModel.findOne({
+        where: {
+          favId: favId,
+          userId: userId,
+        },
+      })
+      if (existingFavorite) {
+        return res.status(200).json(existingFavorite)
+      } else {
+        return res
+          .status(404)
+          .json({ message: 'Elemento no encontrado en la lista de favoritos' })
+      }
+    } catch (error) {
+      return res.status(500).json({ message: error.message })
     }
   }
 }

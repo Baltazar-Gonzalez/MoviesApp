@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { instance } from '../API/api'
-
+import { ApiToUrl } from '../utils/functions'
 import { Flex } from 'antd'
 import { Card } from './Card'
 import { FavoriteCard } from './FavoriteCard'
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 export function List({ title, category, favorite = false }) {
   const [list, setlist] = useState({})
 
+  //Trae la lista de elementos segun la categoria
   useEffect(() => {
     instance
       .get(category)
@@ -17,6 +18,7 @@ export function List({ title, category, favorite = false }) {
       })
       .catch((error) => console.error('Error al obtener datos:', error))
   }, [])
+  
   return (
     <section
       className="px-[40px] pt-[30px] text-black"
@@ -28,26 +30,27 @@ export function List({ title, category, favorite = false }) {
       }}
     >
       <h1 className="py-3 text-xl font-bold">{title}</h1>
-      <Flex className="overflow-x-scroll" gap="middle">
-        {list.results?.map((elem) => {
-          return favorite ? (
-            <Link
-              key={elem.id}
-              className="text-white"
-              to={`/${elem.type}/${elem.favId}`}
-            >
-              <FavoriteCard id={elem.favId} media={elem.type} />
-            </Link>
-          ) : (
-            <Link
-              key={elem.id}
-              className="text-white"
-              to={`/${elem.media_type || list.type}/${elem.id}`}
-            >
-              <Card data={elem} media={elem.media_type || list.type} />
-            </Link>
-          )
-        })}
+      <Flex className="overflow-x-scroll " gap="middle">
+      {(list?.results?.length === 0 ) && (
+        <p className='py-6'>Agrega favoritos a tu lista!</p>
+      )}
+      {list.results?.map((elem) => {
+        return favorite ? (
+          <Link
+            key={elem.id}
+            to={`/${elem.type}/${elem.favId}`}
+          >
+            <FavoriteCard id={elem.favId} media={elem.type} />
+          </Link>
+        ) : (
+          <Link
+            key={elem.id}
+            to={`/${ApiToUrl(elem.media_type || elem.type)}/${elem.id}`}
+          >
+            <Card data={elem} media={ApiToUrl(elem.media_type || elem.type)} />
+          </Link>
+        );
+      })}
       </Flex>
     </section>
   )

@@ -2,6 +2,7 @@ import { Col, Row } from 'antd'
 import { SELECTED_JOBS } from '../utils/constants'
 
 export function Crew({ crew = [] }) {
+  //Verifica que la lista este ordenada solo con los trabajos seleccionados
   const seenPersons = {}
   const sortedCrew = crew
     .filter((elem) => SELECTED_JOBS.includes(elem.job))

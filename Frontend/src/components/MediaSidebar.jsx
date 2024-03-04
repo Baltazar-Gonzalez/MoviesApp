@@ -4,14 +4,17 @@ import { FACEBOOK_URL, TWITTER_URL, INSTAGRAM_URL } from '../utils/constants'
 import { numberWithCommas } from '../utils/functions'
 
 export function MediaSidebar({ data }) {
+  //Retorna null si no hay data
   if (!data || !data.external_ids || !data.keywords) {
     return null
   }
+
+  //Extrae los ids de las redes sociales
   const { facebook_id, instagram_id, twitter_id } = data.external_ids
 
   return (
     <Row>
-      <Col className="mb-7">
+      <Col xs={24} className="mb-7">
         <Row>
           {facebook_id && (
             <Col>
@@ -50,9 +53,9 @@ export function MediaSidebar({ data }) {
       </Col>
       <Col className="mb-7">
         <Row>
-          <Col className="mb-5" md={24}>
+          <Col className="mb-5" xs={24}>
             <Row>
-              <Col md={24}>
+              <Col xs={24}>
                 <span className="font-bold">Estado</span>
               </Col>
               <Col>
@@ -64,9 +67,9 @@ export function MediaSidebar({ data }) {
               </Col>
             </Row>
           </Col>
-          <Col className="mb-5" md={24}>
+          <Col className="mb-5" xs={24}>
             <Row>
-              <Col md={24}>
+              <Col xs={24}>
                 <span className="font-bold">Idioma original</span>
               </Col>
               <Col>
@@ -77,9 +80,9 @@ export function MediaSidebar({ data }) {
               </Col>
             </Row>
           </Col>
-          <Col className="mb-5" md={24}>
+          <Col className="mb-5" xs={24}>
             <Row>
-              <Col md={24}>
+              <Col xs={24}>
                 <span className="font-bold">Presupuesto</span>
               </Col>
               <Col>

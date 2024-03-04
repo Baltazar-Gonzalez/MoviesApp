@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { KEY } from '../config.js'
+import { KEY } from '../config.js' //Llave de la API (https://www.themoviedb.org/)
 
 export class MovieModel {
   static async getPopulars(page) {
@@ -55,7 +55,7 @@ export class MovieModel {
       const response = await axios.get(
         `https://api.themoviedb.org/3/trending/all/day?page=${page}&language=es-AR&api_key=${KEY}`,
       )
-      return { ...response.data}
+      return { ...response.data }
     } catch (error) {
       console.error('Error al obtener datos:', error)
       throw new Error('Error al obtener datos')
@@ -80,9 +80,9 @@ export class MovieModel {
         `https://api.themoviedb.org/3/movie/${id}?append_to_response=credits%2Cexternal_ids%2ckeywords%2Crecommendations&language=es-AR&api_key=${KEY}`,
       )
       const videos = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${KEY}`
+        `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${KEY}`,
       )
-      return { ...response.data, videos: {...videos.data}, type: 'movies' }
+      return { ...response.data, videos: { ...videos.data }, type: 'movies' }
     } catch (error) {
       console.error('Error al obtener datos:', error)
       throw new Error('Error al obtener datos')

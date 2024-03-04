@@ -23,6 +23,7 @@ const endpoints = {
     //Usuarios
     getUsers: `/users`,
     postUser: `/users`,
+    getAuth: `/users/auth`,
     getAllUsers: `/users/all`,
     postUserLogin: `/users/login`,
     getUserById: (id) => `/users/${id}`,
@@ -32,7 +33,8 @@ const endpoints = {
     getFavorites: `/favorites`,
     postFavorite: `/favorites`,
     getFavoritesByUserId: (userId) => `/favorites/${userId}`,
-    deleteFavoriteByUserId: (userId, id) => `/favorites/${userId}/${id}`,
+    getIsUserFavorite: (userId, id) => `/favorites/${userId}/${id}`,
+    deleteFavoriteByUserId: (userId, id) => `/favorites/delete/${userId}/${id}`,
 
     //Busqueda
     getBySearch: (media, search, page) =>
@@ -43,6 +45,7 @@ const instance = axios.create({
     baseURL: BASE_URL,
     headers: {
         'Content-Type': 'application/json',
+        "Authorization": localStorage.getItem('token') ?? ""
     },
 })
 

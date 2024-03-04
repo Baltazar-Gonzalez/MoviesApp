@@ -8,6 +8,7 @@ export function Header() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [value, setValue] = useState(searchParams.get('query') ?? '')
 
+  //Permite realizar la busqueda
   function handleSubmit() {
     navigate({
       pathname: `/search`,
@@ -32,19 +33,19 @@ export function Header() {
         }}
         align="middle"
       >
-        <Col md={24}>
+        <Col xs={24}>
           <Row>
-            <Col md={24}>
+            <Col xs={24}>
               <p className="text-4xl font-extrabold">Bienvenido a MediaApp</p>
             </Col>
-            <Col md={24}>
+            <Col xs={24}>
               <p className="text-2xl font-semibold">
                 Millones de películas y series por descubrir. Explora ya.
               </p>
             </Col>
           </Row>
         </Col>
-        <Col md={24}>
+        <Col xs={24}>
           <Search
             className="w-full"
             placeholder="Buscar una pelicula o serie..."
