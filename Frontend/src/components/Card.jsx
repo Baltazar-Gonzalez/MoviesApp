@@ -24,7 +24,7 @@ export function Card({ data, media }) {
     <Row key={data.id} className="min-h-[360px] w-[150px] content-start gap-3 text-black">
       {
         data?.poster_path ? (
-          <Col className="max-h-[225px]" md={24}>
+          <Col className="max-h-[225px] w-full" md={24}>
             <img
               className="max-w-none mb-2 rounded-md"
               src={`${CARD_URL.concat(data.poster_path)}`}
@@ -41,7 +41,7 @@ export function Card({ data, media }) {
             <span className="font-bold">{data.title || data.name}</span>
           </Col>
           <Col md={24}>
-            <p className="text-xs text-red-300">
+            <p className="text-xs text-red-400">
               {`${[genreList[data.genre_ids[0]], genreList[data.genre_ids[1]]].join(" - ") ?? ''}`}
             </p>
           </Col>
@@ -51,9 +51,17 @@ export function Card({ data, media }) {
                 <span>{data.first_air_date || data.release_date}</span>
               </Col>
               <Col md={6}>
-                <span className="text-amber-500 font-extrabold ">
-                  ⭐ {Number(data.vote_average).toFixed(1)}
-                </span>
+                 {
+                    data.vote_average !== 0 ?(
+                      <span className="text-amber-500 font-extrabold ">
+                        ⭐ {Number(data.vote_average).toFixed(1)} 
+                      </span>
+                    ):(
+                      <span className="text-gray-500 font-extrabold ">
+                        NR
+                      </span>
+                    )
+                  }
               </Col>
             </Row>
           </Col>

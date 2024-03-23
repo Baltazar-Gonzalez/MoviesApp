@@ -17,11 +17,11 @@ export function User() {
         setData(response.data)
       })
       .catch((error) => console.error('Error al obtener datos:', error))
-  }, [])
+  }, [window.location.href])
   return (
     <Row>
       <Col xs={24}>
-       <UserInformation data={data}/>
+        <UserInformation data={data}/>
       </Col>
       <Col className='bg-white' xs={24}>
         <List title="Favoritos" category={endpoints.getFavoritesByUserId(id)} favorite={true} />

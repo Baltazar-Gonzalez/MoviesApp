@@ -2,18 +2,12 @@ import { Row, Col, Flex } from 'antd'
 import { YOUTUBE_TRAILER_URL } from '../utils/constants'
 
 export function TrailerList({ videos }) {
-  //Retorna componente si no hay videos
+  
+  //Retorna null si no hay videos
   if (!videos) {
-    <Row className="px-4 pb-7" style={{ borderTop: '1px solid #d7d7d7' }}>
-      <Col md={24}>
-        <h1 className="py-3 text-xl font-bold">Trailer</h1>
-      </Col>
-      <Col md={24}>
-        <p className="py-3 text-xl ">No hay trailers disponibles...</p>
-      </Col>
-    </Row>
+    return null
   }
-
+  
   return (
     <Row className="px-4 pb-7" style={{ borderTop: '1px solid #d7d7d7' }}>
       <Col md={24}>

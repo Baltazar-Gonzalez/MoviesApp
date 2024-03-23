@@ -39,7 +39,7 @@ function AuthProvider({ children }) {
     .then(response => {
       setUser(response.data.decoded)
     })
-    .catch(err=>console.log(err))
+    .catch(err=>console.log("No ha iniciado sesión"))
   }, [])
 
   return (

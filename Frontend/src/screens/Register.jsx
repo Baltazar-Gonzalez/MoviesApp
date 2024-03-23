@@ -12,7 +12,7 @@ export function Register() {
         </div>
         <div>
           <span>¿Ya tienes una cuenta? </span>
-          <Link>Inicia Sesión</Link>
+          <Link to="/login">Inicia Sesión</Link>
         </div>
       </Flex>
     </Flex>

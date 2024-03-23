@@ -22,27 +22,53 @@ export function FavoriteCard({ id, media }) {
       .catch((error) => console.error('Error al obtener datos:', error))
   }, [id])
 
+   //Retorna null si no hay data
+  if (!data.id) {
+    return null
+  }
+
   return (
-      <Row key={data.id} className="w-[152px] min-h-[325px] rounded-lg shadow-lg content-start gap-3 text-black" style={{border: "1px solid #dbdbdb"}}>
-        <Col className="max-h-[225px]" md={24}>
-          <img
-            className="max-w-none mb-2 rounded-t-lg"
-            src={`${CARD_URL.concat(data.poster_path)}`}
-          />
-        </Col>
-        <Col className='px-[10px] py-[8px]' md={24}>
-          <Row>
-            <Col md={24}>
-              <span className="font-bold">{data.title || data.name}</span>
-            </Col>
-            <Col md={24}>
-                  <span className="text-amber-500 font-extrabold ">
-                    ⭐ {Number(data.vote_average).toFixed(1)}
-                  </span>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+    <Row key={data.id} className="min-h-[300px] w-[150px] content-start gap-3 text-black">
+      {
+        data?.poster_path ? (
+          <Col className="max-h-[225px] w-full" md={24}>
+            <img
+              className="max-w-none mb-2 rounded-md"
+              src={`${CARD_URL.concat(data.poster_path)}`}
+            />
+          </Col>
+        ):(
+          <div className='poster_default'/>
+        )
+      }
+      <Col md={24}>
+        <Row>
+          <Col md={24}>
+            <span className="font-bold">{data.title || data.name}</span>
+          </Col>
+          <Col md={24}>
+            <Row>
+              <Col md={18}>
+                <span>{data.first_air_date || data.release_date}</span>
+              </Col>
+              <Col md={6}>
+                {
+                    data.vote_average !== 0 ?(
+                      <span className="text-amber-500 font-extrabold ">
+                        ⭐ {Number(data.vote_average).toFixed(1)} 
+                      </span>
+                    ):(
+                      <span className="text-gray-500 font-extrabold ">
+                        NR
+                      </span>
+                    )
+                  }
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
   )
 }
 

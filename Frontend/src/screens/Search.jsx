@@ -14,6 +14,10 @@ export function Search() {
 
   //Navigate cuando se cambia el tipo (pelicula o serie)
   function handleClick(mediaType) {
+    setlist({
+      ...list,
+      total_results: "",
+    })
     navigate({
       pathname: `/search/${mediaType}`,
       search: `?query=${searchParams.get('query')}`,
@@ -31,47 +35,47 @@ export function Search() {
         ),
       )
       .then((response) => {
-        console.log(response.data)
         setlist(response.data)
       })
       .catch((error) => console.error('Error al obtener datos:', error))
   }, [searchParams, media])
 
   return (
-    <>
-      <Flex className="px-[40px] pt-[30px]">
-        <Flex className='h-56 rounded-lg bg-white' style={{border: "1px solid #dbdbdb"}} vertical>
+    <Flex vertical justify='center' align='center' gap={10}>
+      <Flex className="px-[40px] pt-[30px] flex-col md:flex-row gap-5 md:gap-0" >
+        <Flex className='md:h-56 rounded-lg bg-white' style={{border: "1px solid #dbdbdb"}} vertical>
             <div className='p-5 mb-2 rounded-t-lg bg-sky-500 text-white text-lg font-semibold'>Resultados de la busqueda</div>
-            <Row className='w-[258px]'>
+            <Row className='md:w-[258px]'>
               <Col className='hover:bg-slate-300' xs={24}>
-                <Row onClick={(e) => handleClick(MOVIES)} className='cursor-pointer px-5 py-2'>
+                <Row onClick={(e) => handleClick(MOVIES)} className={`cursor-pointer px-5 py-2 ${media === MOVIES ? `bg-slate-300`:``}`} >
                   <Col xs={22}>
                     <span>Peliculas</span>
                   </Col>
                   <Col xs={2}>
-                    <span></span>
+                    <span>{media === MOVIES ? list.total_results : ""}</span>
                   </Col>
                 </Row>
               </Col>
               <Col className='hover:bg-slate-300' xs={24}>
-                <Row onClick={(e) => handleClick(SERIES)} className='cursor-pointer px-5 py-2'>
+                <Row onClick={(e) => handleClick(SERIES)} className={`cursor-pointer px-5 py-2 ${media === SERIES ? `bg-slate-300`:``}`}>
                   <Col xs={22}>
                     <span>Series</span>
                   </Col>
                   <Col xs={2}>
-                    <span></span>
+                    <span>{media === SERIES ? list.total_results : ""}</span>
                   </Col>
                 </Row>
               </Col>
             </Row>
         </Flex>
-        <Flex className="pl-[30px]" gap={20} vertical>
+        <Flex className="md:pl-[30px]" gap={20} vertical>
           {list.results?.map((elem) => {
-            return <SearchCard data={elem} media={media} />
+            return <SearchCard key={elem.id} data={elem} media={media} />
           })}
         </Flex>
       </Flex>
       <Pagination
+        className='mt-4'
         onChange={(page) =>
           setSearchParams({ query: searchParams.get('query'), page })
         }
@@ -79,6 +83,6 @@ export function Search() {
         showSizeChanger={false}
         total={list.total_pages < 500 ? list.total_pages * 10 : 5000}
       />
-    </>
+    </Flex>
   )
 }

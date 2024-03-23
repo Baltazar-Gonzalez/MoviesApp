@@ -17,7 +17,7 @@ export function List({ title, category, favorite = false }) {
         setlist(response.data)
       })
       .catch((error) => console.error('Error al obtener datos:', error))
-  }, [])
+  }, [list])
   
   return (
     <section
@@ -30,13 +30,14 @@ export function List({ title, category, favorite = false }) {
       }}
     >
       <h1 className="py-3 text-xl font-bold">{title}</h1>
-      <Flex className="overflow-x-scroll " gap="middle">
+      <Flex className="overflow-x-scroll" gap="middle">
       {(list?.results?.length === 0 ) && (
         <p className='py-6'>Agrega favoritos a tu lista!</p>
       )}
       {list.results?.map((elem) => {
         return favorite ? (
           <Link
+            className='mb-4'
             key={elem.id}
             to={`/${elem.type}/${elem.favId}`}
           >
