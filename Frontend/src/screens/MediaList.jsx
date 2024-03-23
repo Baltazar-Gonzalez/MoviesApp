@@ -25,10 +25,10 @@ export function MediaList({ category, title }) {
         <h1>{title}</h1>
       </Col>
       <Col xs={24}>
-        <Row gutter={[64, 64]} justify="center" >
+        <Row className='gap-6' gutter={[32, 32]} justify="center" >
           {list.results?.map((elem) => {
             return (
-              <Col >
+              <Col key={elem.id} className='shadow-md rounded'>
                 <Link className="text-black" to={`/${list.type}/${elem.id}`}>
                   <Card data={elem} media={list.type} />
                 </Link>

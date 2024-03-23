@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAuth } from '../context/auth'
 import { instance, endpoints } from '../API/api'
 import { Row, Col, Button } from 'antd'
 import { MOVIES, SERIES } from '../utils/constants'
@@ -12,23 +11,7 @@ import { RecommendationList } from '../components/RecommendationList'
 
 export function Media({ media }) {
   const [data, setData] = useState({})
-  const [favorite, setFavorite] = useState(false)
-  const { isAuthenticated, user } = useAuth()
   const { id } = useParams()
-
-  function toggleFavorite() {
-    instance
-      .post(endpoints.postFavorite, {
-        id: 1,
-        favId: id,
-        type: media,
-        userId: userId,
-      })
-      .then((response) => {
-        console.log('Agregado a favoritos')
-      })
-      .catch((error) => console.error('Error al agregar en favoritos:', error))
-  }
 
   useEffect(() => {
     let endpoint = ''
@@ -48,7 +31,7 @@ export function Media({ media }) {
   return (
     <>
       <MediaInformation data={data}/>
-      <Row className='px-8 py-10'>
+      <Row className='px-8 py-10 flex-col-reverse md:flex-row'>
         <Col className="after:content-[''] after:absolute after:top-0 after:right-0 after:bg-gradient-to-r after:from-transparent after:from-0% after:to-[#f5f5f5] after:to-75% after:h-full after:w-16 " md={18}>
           <Row>
             <Col md={24}>

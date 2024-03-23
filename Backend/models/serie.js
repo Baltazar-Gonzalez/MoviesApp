@@ -56,7 +56,7 @@ export class SerieModel {
   static async getBySearch(query, page) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/tv?page=${page}&query=${query}&page=${page}&include_adult=false&language=es-AR&api_key=${KEY}`,
+        `https://api.themoviedb.org/3/search/tv?&query=${query}&page=${page}&include_adult=false&language=es-AR&api_key=${KEY}`,
       )
       return { ...response.data, type: 'series' }
     } catch (error) {

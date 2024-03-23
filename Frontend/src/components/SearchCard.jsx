@@ -10,7 +10,7 @@ export function SearchCard({ data, media }) {
   }
 
   return (
-    <Flex className="border-2 rounded-md shadow-md bg-white">
+    <Flex className="h-[141px] border-2 rounded-md shadow-md bg-white">
         <Link to={`/${media}/${data.id}`}>
           {
             data.poster_path !== null ? (

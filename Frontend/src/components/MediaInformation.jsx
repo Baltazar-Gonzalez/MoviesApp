@@ -41,7 +41,6 @@ export function MediaInformation({ data }) {
     instance
       .get(endpoints.deleteFavoriteByUserId(user?.id, data?.id))
       .then((response) => {
-        console.log(response)
         openNotificationWithIcon("error", response.data.message)
         setFavorite(false)
       })
@@ -50,12 +49,14 @@ export function MediaInformation({ data }) {
 
   //Verifica si es favorito del usuario
   useEffect(()=>{
-    instance
+    if(user !== null){
+      instance
       .get(endpoints.getIsUserFavorite(user?.id, data?.id))
       .then((response) => {
         setFavorite(true)
       })
       .catch((error) => setFavorite(false))
+    } 
   }, [data, user])
 
   return (
@@ -76,11 +77,11 @@ export function MediaInformation({ data }) {
         align="middle"
         justify="center"
       >
-        <Col md={6}>
-          <img className="w-80" src={POSTER_URL.concat(data.poster_path)} />
+        <Col md={8} lg={6}>
+          <img className="w-64 lg:w-72 xl:w-80" src={POSTER_URL.concat(data.poster_path)} />
         </Col>
-        <Col md={18}>
-          <Row className="pl-10 mb-6">
+        <Col md={16} lg={18}>
+          <Row className="md:pl-10 mb-6">
             <Col xs={24}>
               <Row>
                 <Col xs={24}>
@@ -96,11 +97,19 @@ export function MediaInformation({ data }) {
               </Row>
             </Col>
             <Col className="" xs={24}>
-              <Row className="h-16 gap-4" align="middle">
+              <Row className="md:h-16 gap-4" align="middle">
                 <Col>
-                  <span className="text-4xl font-extrabold text-yellow-500">
-                    ⭐ {Number(data.vote_average ?? 0).toFixed(1)}
-                  </span>
+                {
+                    data.vote_average !== 0 ?(
+                      <span className="text-4xl text-amber-500 font-extrabold ">
+                        ⭐ {Number(data.vote_average).toFixed(1)} 
+                      </span>
+                    ):(
+                      <span className="text-4xl text-gray-400 font-extrabold ">
+                        NR
+                      </span>
+                    )
+                  }
                 </Col>
                 <Col>
                 {
@@ -142,7 +151,7 @@ export function MediaInformation({ data }) {
             <Col xs={24}>
               <Row>
                 <Col className="my-2" xs={24}>
-                  <span>{data.tagline}</span>
+                  <span className='italic text-base'>{data.tagline}</span>
                 </Col>
                 <Col>
                   <h2>Vista General</h2>

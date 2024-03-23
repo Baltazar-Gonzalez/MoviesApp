@@ -22,10 +22,10 @@ export function Crew({ crew = [] }) {
         return (
           <Col key={elem.name} md={8}>
             <Row>
-              <Col md={24}>
+              <Col xs={24}>
                 <span className="font-bold">{elem.name}</span>
               </Col>
-              <Col md={24}>
+              <Col xs={24}>
                 <span>{crewList}</span>
               </Col>
             </Row>
