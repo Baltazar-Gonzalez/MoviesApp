@@ -5,4 +5,8 @@ import { USER, PASSWORD, HOST } from '../config.js'
 export const sequelize = new Sequelize('movie-app-postgres', USER, PASSWORD, {
   host: HOST,
   dialect: 'postgres',
+  ssl: {
+    require: true,
+    rejectUnauthorized: false 
+  }
 })
