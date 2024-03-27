@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize'
-import { PASSWORD, HOST } from '../config.js'
+import { USER, PASSWORD, HOST } from '../config.js'
 
 //Conexión con la base de datos Postgres
-export const sequelize = new Sequelize('mediaapp', 'postgres', PASSWORD, {
+export const sequelize = new Sequelize('movie-app-postgres', USER, PASSWORD, {
   host: HOST,
   dialect: 'postgres',
 })
