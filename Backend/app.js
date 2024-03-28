@@ -14,7 +14,7 @@ async function main() {
     await sequelize.sync()
     console.log('Connection has been established successfully')
     app.listen(PORT, () =>
-      console.log(`server listening on port http://localhost:${PORT}`),
+      console.log(`server listening on port ${PORT}`),
     )
   } catch (err) {
     console.log('Unable to connect to the database', err)
@@ -26,6 +26,9 @@ app.use(cors())
 app.use(express.json())
 
 //Endpoint
+app.get('/', () => {
+    res.send("MediaApp DB")
+})
 app.use('/movies', movieRoutes)
 app.use('/series', serieRoutes)
 app.use('/users', userRoutes)
