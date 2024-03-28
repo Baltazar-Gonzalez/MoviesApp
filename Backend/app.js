@@ -35,6 +35,12 @@ app.use('/', (req, res) => {
   res.status(404).send('Ruta no encontrada')
 })
 
-main()
+if (require.main === module) {
+  main().then(() => {
+    app.listen(PORT, () =>
+      console.log(`Server listening on port ${PORT}`),
+    );
+  });
+}
 
 export default app
