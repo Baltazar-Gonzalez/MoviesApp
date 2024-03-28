@@ -35,7 +35,7 @@ app.use('/', (req, res) => {
   res.status(404).send('Ruta no encontrada')
 })
 
-if (require.main === module) {
+if (import.meta.main){
   main().then(() => {
     app.listen(PORT, () =>
       console.log(`Server listening on port ${PORT}`),
