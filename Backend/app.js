@@ -26,9 +26,6 @@ app.use(cors())
 app.use(express.json())
 
 //Endpoint
-app.get('/', () => {
-    res.send("MediaApp DB")
-})
 app.use('/movies', movieRoutes)
 app.use('/series', serieRoutes)
 app.use('/users', userRoutes)
