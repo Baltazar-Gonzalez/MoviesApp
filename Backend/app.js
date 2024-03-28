@@ -36,3 +36,5 @@ app.use('/', (req, res) => {
 })
 
 main()
+
+module.exports = app
