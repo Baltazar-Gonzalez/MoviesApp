@@ -9,7 +9,7 @@
 .profile_default{
     width: 138px;
     height: 175px;
-    background-image: url(./assets/default-cast.svg);
+    background-image: url(./default-cast.svg);
     background-position: center;
     background-size: 64px;
     background-repeat: no-repeat;
@@ -18,7 +18,7 @@
 .poster_default{
     width: 150px;
     height: 225px;
-    background-image: url(./assets/default-poster.svg);
+    background-image: url(./default-poster.svg);
     background-position: center;
     background-size: 64px;
     background-repeat: no-repeat;
@@ -27,7 +27,7 @@
 .small_poster_default{
     width: 94px;
     height: 141px;
-    background-image: url(./assets/default-poster.svg);
+    background-image: url(./default-poster.svg);
     background-position: center;
     background-size: 64px;
     background-repeat: no-repeat;
@@ -36,7 +36,7 @@
 .small_backdrop_default{
     width: 250px;
     height: 141px;
-    background-image: url(./assets/default-poster.svg);
+    background-image: url(./default-poster.svg);
     background-position: center;
     background-size: 64px;
     background-repeat: no-repeat;

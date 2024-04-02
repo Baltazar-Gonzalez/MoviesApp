@@ -5,20 +5,24 @@ import { useAuth } from '../context/auth'
 import { Col, Row, Button, notification } from 'antd'
 import { Crew } from './Crew'
 import { minutesConvert } from '../utils/functions'
-import { HeartOutlined, HeartFilled, CaretRightOutlined } from '@ant-design/icons'
+import {
+  HeartOutlined,
+  HeartFilled,
+  CaretRightOutlined,
+} from '@ant-design/icons'
 import { BACKDROP_URL, POSTER_URL } from '../utils/constants'
 
 export function MediaInformation({ data }) {
   const [favorite, setFavorite] = useState(false)
   const { user, isAuthenticated } = useAuth()
   const navigate = useNavigate()
-  const [api, contextHolder] = notification.useNotification();
+  const [api, contextHolder] = notification.useNotification()
 
   //Configuración de las notificaciones
-  const openNotificationWithIcon = (type, message = "Parametros invalidos") => {
+  const openNotificationWithIcon = (type, message = 'Parametros invalidos') => {
     api[type]({
       message,
-    });
+    })
   }
 
   //Agrega favorito al usuario
@@ -30,7 +34,7 @@ export function MediaInformation({ data }) {
         userId: user.id,
       })
       .then((response) => {
-        openNotificationWithIcon("success", response.data.message)
+        openNotificationWithIcon('success', response.data.message)
         setFavorite(true)
       })
       .catch((error) => console.error('Error al agregar en favoritos:', error))
@@ -41,22 +45,22 @@ export function MediaInformation({ data }) {
     instance
       .get(endpoints.deleteFavoriteByUserId(user?.id, data?.id))
       .then((response) => {
-        openNotificationWithIcon("error", response.data.message)
+        openNotificationWithIcon('error', response.data.message)
         setFavorite(false)
       })
       .catch((error) => console.error('Error al eliminar de favoritos:', error))
   }
 
   //Verifica si es favorito del usuario
-  useEffect(()=>{
-    if(user !== null){
+  useEffect(() => {
+    if (user !== null) {
       instance
-      .get(endpoints.getIsUserFavorite(user?.id, data?.id))
-      .then((response) => {
-        setFavorite(true)
-      })
-      .catch((error) => setFavorite(false))
-    } 
+        .get(endpoints.getIsUserFavorite(user?.id, data?.id))
+        .then((response) => {
+          setFavorite(true)
+        })
+        .catch((error) => setFavorite(false))
+    }
   }, [data, user])
 
   return (
@@ -78,14 +82,17 @@ export function MediaInformation({ data }) {
         justify="center"
       >
         <Col md={8} lg={6}>
-          <img className="w-64 lg:w-72 xl:w-80" src={POSTER_URL.concat(data.poster_path)} />
+          <img
+            className="w-64 lg:w-72 xl:w-80"
+            src={POSTER_URL.concat(data.poster_path)}
+          />
         </Col>
         <Col md={16} lg={18}>
           <Row className="md:pl-10 mb-6">
             <Col xs={24}>
               <Row>
                 <Col xs={24}>
-                  <h1>{`${(data?.title || data?.name) ?? ""} (${(data?.release_date ? data?.release_date.split('-')[0] : data?.first_air_date?.split('-')[0]) ?? ""})`}</h1>
+                  <h1>{`${(data?.title || data?.name) ?? ''} (${(data?.release_date ? data?.release_date.split('-')[0] : data?.first_air_date?.split('-')[0]) ?? ''})`}</h1>
                 </Col>
                 <Col className="mb-6 text-lg" xs={24}>
                   <span>
@@ -99,43 +106,42 @@ export function MediaInformation({ data }) {
             <Col className="" xs={24}>
               <Row className="md:h-16 gap-4" align="middle">
                 <Col>
-                {
-                    data.vote_average !== 0 ?(
-                      <span className="text-4xl text-amber-500 font-extrabold ">
-                        ⭐ {Number(data.vote_average).toFixed(1)} 
-                      </span>
-                    ):(
-                      <span className="text-4xl text-gray-400 font-extrabold ">
-                        NR
-                      </span>
-                    )
-                  }
+                  {data.vote_average !== 0 ? (
+                    <span className="text-4xl text-amber-500 font-extrabold ">
+                      ⭐ {Number(data.vote_average).toFixed(1)}
+                    </span>
+                  ) : (
+                    <span className="text-4xl text-gray-400 font-extrabold ">
+                      NR
+                    </span>
+                  )}
                 </Col>
                 <Col>
-                {
-                  favorite ? (
+                  {favorite ? (
                     <Button
-                    className="bg-sky-100 text-sky-950 hover:bg-red-700 hover:text-white"
-                    size="large"
-                    onClick={deleteFavorite}
-                    type="primary"
-                    icon={<HeartFilled />}
+                      className="bg-sky-100 text-sky-950 hover:bg-red-700 hover:text-white"
+                      size="large"
+                      onClick={deleteFavorite}
+                      type="primary"
+                      icon={<HeartFilled />}
                     >
                       {'Eliminar de favoritos'}
                     </Button>
-                  ):(
-                  <Button
-                    className="bg-sky-950 text-slate-100 hover:bg-sky-100 hover:text-sky-950"
-                    size="large"
-                    onClick={isAuthenticated() ? addFavorite : e => navigate("/login")}
-                    type="primary"
-                    icon={<HeartOutlined />}
+                  ) : (
+                    <Button
+                      className="bg-sky-950 text-slate-100 hover:bg-sky-100 hover:text-sky-950"
+                      size="large"
+                      onClick={
+                        isAuthenticated()
+                          ? addFavorite
+                          : (e) => navigate('/login')
+                      }
+                      type="primary"
+                      icon={<HeartOutlined />}
                     >
                       {'Agregar a favoritos'}
                     </Button>
-                  )
-                }
-                  
+                  )}
                 </Col>
                 <Col>
                   <a
@@ -151,7 +157,7 @@ export function MediaInformation({ data }) {
             <Col xs={24}>
               <Row>
                 <Col className="my-2" xs={24}>
-                  <span className='italic text-base'>{data.tagline}</span>
+                  <span className="italic text-base">{data.tagline}</span>
                 </Col>
                 <Col>
                   <h2>Vista General</h2>

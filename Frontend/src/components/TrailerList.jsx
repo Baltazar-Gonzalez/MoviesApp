@@ -2,12 +2,11 @@ import { Row, Col, Flex } from 'antd'
 import { YOUTUBE_TRAILER_URL } from '../utils/constants'
 
 export function TrailerList({ videos }) {
-  
   //Retorna null si no hay videos
   if (!videos) {
     return null
   }
-  
+
   return (
     <Row className="px-4 pb-7" style={{ borderTop: '1px solid #d7d7d7' }}>
       <Col md={24}>

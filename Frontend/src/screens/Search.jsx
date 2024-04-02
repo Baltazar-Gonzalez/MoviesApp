@@ -16,7 +16,7 @@ export function Search() {
   function handleClick(mediaType) {
     setlist({
       ...list,
-      total_results: "",
+      total_results: '',
     })
     navigate({
       pathname: `/search/${mediaType}`,
@@ -41,32 +41,44 @@ export function Search() {
   }, [searchParams, media])
 
   return (
-    <Flex vertical justify='center' align='center' gap={10}>
-      <Flex className="px-[40px] pt-[30px] flex-col md:flex-row gap-5 md:gap-0" >
-        <Flex className='md:h-56 rounded-lg bg-white' style={{border: "1px solid #dbdbdb"}} vertical>
-            <div className='p-5 mb-2 rounded-t-lg bg-sky-500 text-white text-lg font-semibold'>Resultados de la busqueda</div>
-            <Row className='md:w-[258px]'>
-              <Col className='hover:bg-slate-300' xs={24}>
-                <Row onClick={(e) => handleClick(MOVIES)} className={`cursor-pointer px-5 py-2 ${media === MOVIES ? `bg-slate-300`:``}`} >
-                  <Col xs={22}>
-                    <span>Peliculas</span>
-                  </Col>
-                  <Col xs={2}>
-                    <span>{media === MOVIES ? list.total_results : ""}</span>
-                  </Col>
-                </Row>
-              </Col>
-              <Col className='hover:bg-slate-300' xs={24}>
-                <Row onClick={(e) => handleClick(SERIES)} className={`cursor-pointer px-5 py-2 ${media === SERIES ? `bg-slate-300`:``}`}>
-                  <Col xs={22}>
-                    <span>Series</span>
-                  </Col>
-                  <Col xs={2}>
-                    <span>{media === SERIES ? list.total_results : ""}</span>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
+    <Flex vertical justify="center" align="center" gap={10}>
+      <Flex className="px-[40px] pt-[30px] flex-col md:flex-row gap-5 md:gap-0">
+        <Flex
+          className="md:h-56 rounded-lg bg-white"
+          style={{ border: '1px solid #dbdbdb' }}
+          vertical
+        >
+          <div className="p-5 mb-2 rounded-t-lg bg-sky-500 text-white text-lg font-semibold">
+            Resultados de la busqueda
+          </div>
+          <Row className="md:w-[258px]">
+            <Col className="hover:bg-slate-300" xs={24}>
+              <Row
+                onClick={(e) => handleClick(MOVIES)}
+                className={`cursor-pointer px-5 py-2 ${media === MOVIES ? `bg-slate-300` : ``}`}
+              >
+                <Col xs={22}>
+                  <span>Peliculas</span>
+                </Col>
+                <Col xs={2}>
+                  <span>{media === MOVIES ? list.total_results : ''}</span>
+                </Col>
+              </Row>
+            </Col>
+            <Col className="hover:bg-slate-300" xs={24}>
+              <Row
+                onClick={(e) => handleClick(SERIES)}
+                className={`cursor-pointer px-5 py-2 ${media === SERIES ? `bg-slate-300` : ``}`}
+              >
+                <Col xs={22}>
+                  <span>Series</span>
+                </Col>
+                <Col xs={2}>
+                  <span>{media === SERIES ? list.total_results : ''}</span>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
         </Flex>
         <Flex className="md:pl-[30px]" gap={20} vertical>
           {list.results?.map((elem) => {
@@ -75,7 +87,7 @@ export function Search() {
         </Flex>
       </Flex>
       <Pagination
-        className='mt-4'
+        className="mt-4"
         onChange={(page) =>
           setSearchParams({ query: searchParams.get('query'), page })
         }

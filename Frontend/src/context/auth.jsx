@@ -11,7 +11,7 @@ function AuthProvider({ children }) {
       const response = await instance.post(endpoints.postUserLogin, userData)
       const loggedInUser = response?.data?.user
       setUser(loggedInUser)
-      localStorage.setItem('token', response?.data?.token) 
+      localStorage.setItem('token', response?.data?.token)
     } catch (error) {
       if (error.response.status === 401) {
         throw new Error('Credenciales inválidas')
@@ -24,7 +24,7 @@ function AuthProvider({ children }) {
 
   //Borra el estado y el localStorage del usuario
   const logout = () => {
-    localStorage.removeItem('token') 
+    localStorage.removeItem('token')
     setUser(null)
   }
 
@@ -34,12 +34,13 @@ function AuthProvider({ children }) {
   }
 
   //Verifica si existe un token del usuario
-  useEffect(()=>{
-    instance.get(endpoints.getAuth)
-    .then(response => {
-      setUser(response.data.decoded)
-    })
-    .catch(err=>console.log("No ha iniciado sesión"))
+  useEffect(() => {
+    instance
+      .get(endpoints.getAuth)
+      .then((response) => {
+        setUser(response.data.decoded)
+      })
+      .catch((err) => console.log('No ha iniciado sesión'))
   }, [])
 
   return (

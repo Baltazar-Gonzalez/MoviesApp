@@ -6,7 +6,7 @@ export function CastList({ credits }) {
   if (!credits || !credits.cast) {
     return null
   }
-  
+
   return (
     <Row className="px-4 pb-7 ">
       <Col md={24}>

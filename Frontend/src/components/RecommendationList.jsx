@@ -28,26 +28,23 @@ export function RecommendationList({ recommendations, media }) {
                       className="rounded-lg"
                       src={SMALL_BACKDROP_ULR.concat(recommend.backdrop_path)}
                     />
-                  ):(
-                    <div className='small_backdrop_default' />
-                  )
-                }
+                  ) : (
+                    <div className="small_backdrop_default" />
+                  )}
                   <Row>
                     <Col md={18}>
                       <span>{recommend.title || recommend.name}</span>
                     </Col>
                     <Col md={6}>
-                      {
-                        recommend.vote_average !== 0 ?(
-                          <span className="text-amber-500 font-extrabold ">
-                            ⭐ {Number(recommend.vote_average).toFixed(1)} 
-                          </span>
-                        ):(
-                          <span className="text-gray-500 font-extrabold ">
-                            NR
-                          </span>
-                        )
-                      }
+                      {recommend.vote_average !== 0 ? (
+                        <span className="text-amber-500 font-extrabold ">
+                          ⭐ {Number(recommend.vote_average).toFixed(1)}
+                        </span>
+                      ) : (
+                        <span className="text-gray-500 font-extrabold ">
+                          NR
+                        </span>
+                      )}
                     </Col>
                   </Row>
                 </Link>

@@ -25,10 +25,10 @@ export function MediaList({ category, title }) {
         <h1>{title}</h1>
       </Col>
       <Col xs={24}>
-        <Row className='gap-6' gutter={[32, 32]} justify="center" >
+        <Row className="gap-6" gutter={[32, 32]} justify="center">
           {list.results?.map((elem) => {
             return (
-              <Col key={elem.id} className='shadow-md rounded'>
+              <Col key={elem.id} className="shadow-md rounded">
                 <Link className="text-black" to={`/${list.type}/${elem.id}`}>
                   <Card data={elem} media={list.type} />
                 </Link>
@@ -37,15 +37,15 @@ export function MediaList({ category, title }) {
           })}
         </Row>
       </Col>
-      <Col xs={24} className='pb-[40px]'>
+      <Col xs={24} className="pb-[40px]">
         <Row justify="center">
           <Col>
             <Pagination
-            onChange={(page) => setSearchParams({ page })}
-            current={list.page}
-            showSizeChanger={false}
-            total={list.total_pages < 500 ? list.total_pages * 10 : 5000}
-          />
+              onChange={(page) => setSearchParams({ page })}
+              current={list.page}
+              showSizeChanger={false}
+              total={list.total_pages < 500 ? list.total_pages * 10 : 5000}
+            />
           </Col>
         </Row>
       </Col>

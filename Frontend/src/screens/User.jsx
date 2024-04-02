@@ -21,10 +21,14 @@ export function User() {
   return (
     <Row>
       <Col xs={24}>
-        <UserInformation data={data}/>
+        <UserInformation data={data} />
       </Col>
-      <Col className='bg-white' xs={24}>
-        <List title="Favoritos" category={endpoints.getFavoritesByUserId(id)} favorite={true} />
+      <Col className="bg-white" xs={24}>
+        <List
+          title="Favoritos"
+          category={endpoints.getFavoritesByUserId(id)}
+          favorite={true}
+        />
       </Col>
     </Row>
   )

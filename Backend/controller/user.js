@@ -1,7 +1,7 @@
 import { UserModel } from '../models/user.js'
 import jwt from 'jsonwebtoken'
 import crypto from 'node:crypto'
-import { SECRET } from '../config.js'
+const SECRET = process.env.SECRET
 
 function generateAccessToken(user) {
   return jwt.sign(user, SECRET)

@@ -1,8 +1,10 @@
 import { Sequelize } from 'sequelize'
-import { PASSWORD, HOST } from '../config.js'
 
 //Conexión con la base de datos Postgres
-export const sequelize = new Sequelize('mediaapp', 'postgres', PASSWORD, {
-  host: HOST,
+export const sequelize = new Sequelize(process.env.POSTGRES_URL, {
   dialect: 'postgres',
+  ssl: {
+    require: true,
+    rejectUnauthorized: false,
+  },
 })

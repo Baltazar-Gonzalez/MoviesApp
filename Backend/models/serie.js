@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { KEY } from '../config.js' //Llave de la API (https://www.themoviedb.org/)
+const KEY = process.env.KEY //Llave de la API (https://www.themoviedb.org/)
 
 export class SerieModel {
   static async getPopulars(page) {

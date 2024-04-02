@@ -19,7 +19,7 @@ export function Header() {
   return (
     <div
       style={{
-        backgroundImage: `url(./src/assets/header-background.avif)`,
+        backgroundImage: `url(./assets/header-background.avif)`,
         backgroundSize: 'auto 1360px',
         backgroundPosition: 'center -750px',
         backgroundRepeat: 'no-repeat',

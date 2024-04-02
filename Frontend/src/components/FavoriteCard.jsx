@@ -22,25 +22,26 @@ export function FavoriteCard({ id, media }) {
       .catch((error) => console.error('Error al obtener datos:', error))
   }, [id])
 
-   //Retorna null si no hay data
+  //Retorna null si no hay data
   if (!data.id) {
     return null
   }
 
   return (
-    <Row key={data.id} className="min-h-[300px] w-[150px] content-start gap-3 text-black">
-      {
-        data?.poster_path ? (
-          <Col className="max-h-[225px] w-full" md={24}>
-            <img
-              className="max-w-none mb-2 rounded-md"
-              src={`${CARD_URL.concat(data.poster_path)}`}
-            />
-          </Col>
-        ):(
-          <div className='poster_default'/>
-        )
-      }
+    <Row
+      key={data.id}
+      className="min-h-[300px] w-[150px] content-start gap-3 text-black"
+    >
+      {data?.poster_path ? (
+        <Col className="max-h-[225px] w-full" md={24}>
+          <img
+            className="max-w-none mb-2 rounded-md"
+            src={`${CARD_URL.concat(data.poster_path)}`}
+          />
+        </Col>
+      ) : (
+        <div className="poster_default" />
+      )}
       <Col md={24}>
         <Row>
           <Col md={24}>
@@ -52,17 +53,13 @@ export function FavoriteCard({ id, media }) {
                 <span>{data.first_air_date || data.release_date}</span>
               </Col>
               <Col md={6}>
-                {
-                    data.vote_average !== 0 ?(
-                      <span className="text-amber-500 font-extrabold ">
-                        ⭐ {Number(data.vote_average).toFixed(1)} 
-                      </span>
-                    ):(
-                      <span className="text-gray-500 font-extrabold ">
-                        NR
-                      </span>
-                    )
-                  }
+                {data.vote_average !== 0 ? (
+                  <span className="text-amber-500 font-extrabold ">
+                    ⭐ {Number(data.vote_average).toFixed(1)}
+                  </span>
+                ) : (
+                  <span className="text-gray-500 font-extrabold ">NR</span>
+                )}
               </Col>
             </Row>
           </Col>
